@@ -11,3 +11,6 @@ def home():
 def types():
     return render_template('types.html')
 
+@app.route('/What_is_ML/')
+def what_is_ml():
+    return render_template('what_is_ml.html')
