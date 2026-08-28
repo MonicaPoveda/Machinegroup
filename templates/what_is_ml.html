@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Machine Learning?</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white !important;
+        }
+
+        .navbar-brand .highlight {
+            color: #0dcaf0;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #0dcaf0, #6610f2);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            padding: 8px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(13, 202, 240, 0.3);
+            color: white;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .page-title .highlight {
+            background: linear-gradient(135deg, #0dcaf0, #6610f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            font-size: 1.1rem;
+        }
+
+        .content-block {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 40px;
+            margin-bottom: 25px;
+        }
+
+        .content-block h3 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #0dcaf0;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-block p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .content-block p + p {
+            margin-top: 12px;
+        }
+
+        .highlight-text {
+            color: white;
+            font-weight: 600;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="highlight">MACHINE</span> LEARNING
+            </a>
+            <a href="/" class="btn-back">
+                <i class="bi bi-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="py-5">
+        <div class="container">
+
+            <!-- TITLE -->
+            <div class="text-center mb-5">
+                <h1 class="page-title">
+                    What is <span class="highlight">Machine Learning?</span>
+                </h1>
+                <p class="section-subtitle">
+                    An introduction to one of the most transformative fields in modern computer science.
+                </p>
+            </div>
+
+            <!-- BLOCK 1: Definition -->
+            <div class="content-block">
+                <h3>Definition</h3>
+                <p>
+                    Machine Learning (ML) is a branch of <span class="highlight-text">artificial intelligence</span> 
+                    that enables computer systems to learn from data and improve their performance on tasks over time, 
+                    without being explicitly programmed for each one. Rather than following a fixed set of rules 
+                    written by a programmer, a machine learning model identifies patterns in data and uses those 
+                    patterns to make decisions or predictions.
+                </p>
+                <p>
+                    The term was coined by <span class="highlight-text">Arthur Samuel in 1959</span>, who described 
+                    it as the field of study that gives computers the ability to learn without being explicitly programmed.
+                </p>
+            </div>
+
+            <!-- BLOCK 2: How it works -->
+            <div class="content-block">
+                <h3>How It Works</h3>
+                <p>
+                    At its core, machine learning works by feeding large amounts of data into an algorithm, 
+                    which then builds a mathematical model based on that data. This model captures the relationships 
+                    and patterns present in the training data, allowing it to generalize and make predictions or 
+                    decisions on new, unseen data.
+                </p>
+                <p>
+                    The process typically involves three stages: <span class="highlight-text">training</span>, 
+                    where the algorithm learns from historical data; <span class="highlight-text">validation</span>, 
+                    where the model is tested and adjusted to improve accuracy; and 
+                    <span class="highlight-text">inference</span>, where the trained model is applied to real-world data 
+                    to generate predictions or automate tasks.
+                </p>
+            </div>
+
+            <!-- BLOCK 3: Why it matters -->
+            <div class="content-block">
+                <h3>Why It Matters</h3>
+                <p>
+                    Machine learning has become one of the most impactful technologies of the modern era. 
+                    It powers applications we use every day, from <span class="highlight-text">search engines 
+                    and recommendation systems</span> to <span class="highlight-text">voice assistants, 
+                    medical diagnosis tools, and autonomous vehicles</span>.
+                </p>
+                <p>
+                    Its significance lies in its ability to process and extract meaning from massive datasets 
+                    far beyond human capacity. By automating the discovery of patterns, ML allows organizations 
+                    to make faster, more accurate decisions, reduce operational costs, and unlock new 
+                    possibilities in science, medicine, finance, and engineering.
+                </p>
+            </div>
+
+            <!-- BLOCK 4: Key concepts -->
+            <div class="content-block">
+                <h3>Key Concepts</h3>
+                <p>
+                    Several foundational concepts underpin machine learning. A <span class="highlight-text">dataset</span> 
+                    is the collection of examples used to train and evaluate a model. 
+                    <span class="highlight-text">Features</span> are the individual measurable properties 
+                    of the data that the model uses as input. The <span class="highlight-text">label</span> 
+                    is the output variable the model is trying to predict, and the 
+                    <span class="highlight-text">algorithm</span> is the method used to find patterns 
+                    and build the predictive model.
+                </p>
+                <p>
+                    Model performance is evaluated using metrics such as accuracy, precision, recall, 
+                    and loss functions, which measure how well the model's predictions match the actual outcomes. 
+                    The goal is always to build a model that <span class="highlight-text">generalizes well</span> 
+                    to new data, rather than simply memorizing the training examples.
+                </p>
+            </div>
+
+            <!-- BACK BUTTON -->
+            <div class="text-center mt-5">
+                <a href="/" class="btn btn-back btn-lg px-5">
+                    <i class="bi bi-house"></i> Back to Home
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-4 mt-5">
+        <div class="container text-center">
+            <p class="text-white-50 small mb-0">
+                <i class="bi bi-mortarboard"></i> University of Cundinamarca - Systems Engineering
+                <br>
+                Machine Learning - Sixth Semester
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
