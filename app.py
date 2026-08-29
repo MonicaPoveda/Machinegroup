@@ -14,3 +14,6 @@ def types():
 @app.route('/What_is_ML/')
 def what_is_ml():
     return render_template('what_is_ml.html')
+
+if __name__ == '__main__':
+   app.run(debug=True)
