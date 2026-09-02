@@ -1,0 +1,202 @@
+/* ============================================
+   GLOBAL DESIGN SYSTEM & VARIABLES
+   Centralizes colors, fonts, and theme values.
+============================================ */
+
+:root {
+    --font-main: 'Outfit', sans-serif;
+    --color-bg: #050a18;
+    --color-bg-card: rgba(3, 12, 25, 0.40);
+    --color-accent: #1478ff;
+    --color-accent-hover: #1490ff;
+    --color-border: rgba(20, 120, 255, 0.35);
+    --color-text-secondary: rgba(255, 255, 255, 0.70);
+    --color-text-muted: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================================
+   BASE / LAYOUT DEFAULTS
+   Sets application-wide font family and resets.
+============================================ */
+
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* ============================================
+   NAVIGATION BAR
+   Glassmorphism navbar with custom link states.
+============================================ */
+
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(5, 10, 24, 0.55);
+    border-bottom: 1px solid rgba(20, 120, 255, 0.25);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.brand-highlight {
+    color: var(--color-accent);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75) !important;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #ffffff !important;
+}
+
+.navbar-nav .dropdown-toggle::after {
+    vertical-align: middle;
+}
+
+/* ============================================
+   DROPDOWN MENUS
+   Styled dark dropdowns with glass effect.
+============================================ */
+
+.dropdown-menu-dark {
+    background: rgba(3, 12, 25, 0.92);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: rgba(20, 120, 255, 0.15);
+    color: #ffffff;
+}
+
+.dropdown-item.disabled {
+    color: rgba(255, 255, 255, 0.30) !important;
+}
+
+.dropdown-divider {
+    border-color: rgba(20, 120, 255, 0.25);
+}
+
+.dropdown-header {
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+   REUSABLE CARDS
+   Interactive feature cards (Home, Types, etc.)
+============================================ */
+
+.explore-card {
+    height: 100%;
+    background: var(--color-bg-card);
+    border: 1px solid rgba(20, 120, 255, 0.60);
+    border-radius: 18px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-accent);
+    box-shadow: 0 15px 45px rgba(20, 120, 255, 0.18);
+}
+
+/* Ensures equal height cards alignment */
+.explore-card .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.explore-card .card-text {
+    flex-grow: 1;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.65;
+}
+
+.explore-card .card-title {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.explore-card .explore-link {
+    margin-top: auto;
+}
+
+/* Circular icon badges */
+.card-icon {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    font-size: 2rem;
+    background: rgba(20, 120, 255, 0.04);
+    flex-shrink: 0;
+}
+
+/* Action links inside cards */
+.explore-link {
+    color: var(--color-accent-hover);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.explore-link:hover {
+    color: #ffffff;
+}
+
+/* ============================================
+   REUSABLE SECTION HEADERS
+   Standardized headers for main content pages.
+============================================ */
+
+.section-label,
+.explore-label {
+    color: var(--color-accent);
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.section-line,
+.explore-line {
+    display: inline-block;
+    width: 45px;
+    height: 1px;
+    background: var(--color-accent);
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+.section-title,
+.explore-title {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.section-description,
+.explore-description {
+    max-width: 700px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
