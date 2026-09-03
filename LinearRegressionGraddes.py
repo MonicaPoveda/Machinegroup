@@ -1,3 +1,4 @@
+
 import io
 import base64
 import pandas as pd
@@ -5,6 +6,7 @@ import matplotlib
 matplotlib.use('Agg')  # Modo no interactivo para el servidor
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+
 
 # Datos y entrenamiento inicial
 data = {
