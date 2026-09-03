@@ -1,0 +1,739 @@
+{% extends "base.html" %}
+
+{% block title %}
+Linear Regression Concepts
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concepts.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="concepts-page pt-5 mt-5 pb-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="section-label text-uppercase fw-bold text-primary">
+                <span class="section-line"></span> SUPERVISED LEARNING <span class="section-line"></span>
+            </span>
+            <h1 class="section-title display-4 fw-bold text-white mt-2 mb-3">Linear Regression Concepts</h1>
+            <p class="section-description mx-auto lead text-light fs-5 max-w-760">
+                Explore these seven foundational concepts in sequential order to master how Linear Regression learns to make data-driven predictions before interacting with the live model.
+            </p>
+        </div>
+
+        <nav class="path-nav mb-5" id="pathNav" aria-label="Learning path">
+            <a href="#definition" data-target="definition">Definition</a>
+            <a href="#problems" data-target="problems">Problems</a>
+            <a href="#variables" data-target="variables">Variables</a>
+            <a href="#relationship" data-target="relationship">Relationship</a>
+            <a href="#regression-line" data-target="regression-line">Line</a>
+            <a href="#prediction" data-target="prediction">Prediction</a>
+            <a href="#example" data-target="example">Example</a>
+        </nav>
+
+        <section id="definition" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-graph-up-arrow fs-4"></i>
+                            </div>
+                            <h2 class="concept-title h3 text-white mb-0 fw-bold">
+                                What is Linear Regression?
+                            </h2>
+                        </div>
+                        <p class="concept-text text-light fs-5 mb-4">
+                            Linear Regression is a statistical technique used to examine the relationship between variables and predict continuous numerical outcomes. In Machine Learning, the model learns this underlying structure from observed data to estimate unknown target values.
+                        </p>
+                        <div class="definition-highlight p-3 rounded-3 bg-primary bg-opacity-25 border-start border-primary border-4">
+                            <strong class="text-white fs-6 d-block mb-1">
+                                Core Takeaway
+                            </strong>
+                            <p class="text-light mb-0 fs-6">
+                                The objective is to identify the best-fit straight line representing historical observations, enabling precise predictions for unseen inputs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="visual-frame rounded-3 overflow-hidden shadow">
+                            <img src="{{ url_for('static', filename='images/Linear_regression.webp') }}"
+                                 alt="Linear Regression plot displaying sample data points and fitted line"
+                                 class="img-fluid w-100">
+                            <div class="image-caption p-2 text-center text-light small bg-dark bg-opacity-75">
+                                Scatter plot showing observed data and the fitted regression line.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="problems" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                        <i class="bi bi-bullseye fs-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="concept-title h3 text-white mb-1 fw-bold">
+                            What Problems Can It Solve?
+                        </h2>
+                        <p class="text-light opacity-75 mb-0 fs-6">
+                            Applicable whenever the target variable is continuous and numerical.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="problem-item d-flex gap-3 mb-3 p-3 rounded-3 bg-white bg-opacity-10">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            <div>
+                                <strong class="text-white d-block mb-1 fs-6">Continuous Value Forecasting</strong>
+                                <span class="text-light fs-6">
+                                    Predict quantities such as real estate prices, revenue, temperature, energy consumption, or test scores.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="problem-item d-flex gap-3 p-3 rounded-3 bg-white bg-opacity-10">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            <div>
+                                <strong class="text-white d-block mb-1 fs-6">Data-Driven Estimation</strong>
+                                <span class="text-light fs-6">
+                                    Leverages historical features to approximate unobserved numeric parameters accurately.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="problem-item d-flex gap-3 mb-3 p-3 rounded-3 bg-white bg-opacity-10">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            <div>
+                                <strong class="text-white d-block mb-1 fs-6">Feature Relationship Analysis</strong>
+                                <span class="text-light fs-6">
+                                    Quantifies the magnitude and direction of influence one attribute exerts over another.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="problem-item d-flex gap-3 p-3 rounded-3 bg-white bg-opacity-10">
+                            <i class="bi bi-x-circle-fill text-danger fs-4"></i>
+                            <div>
+                                <strong class="text-white d-block mb-1 fs-6">When is it unsuitable?</strong>
+                                <span class="text-light fs-6">
+                                    If the target variable is categorical (e.g., "spam" vs. "not spam"), classification algorithms must be used instead.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="variables" class="concept-section mb-5">
+
+    <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25"
+        style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+
+        <div class="d-flex align-items-center mb-3">
+
+            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px;">
+                <i class="bi bi-sliders fs-4"></i>
+            </div>
+
+            <h2 class="h3 text-white mb-0 fw-bold">
+                Independent and Dependent Variables
+            </h2>
+
+        </div>
+
+        <p class="text-light fs-5 mb-4">
+            Prior to training a model, two primary components must be defined:
+            the <strong class="text-white">input features</strong> (known data)
+            and the <strong class="text-white">target variable</strong>
+            (the numeric output to predict).
+        </p>
+
+
+        <!-- Independent and Dependent Variables -->
+
+        <div class="row g-4 mb-4">
+
+            <!-- Independent Variable -->
+
+            <div class="col-12 col-md-6">
+
+                <div class="d-flex align-items-start gap-3 p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <div class="var-token independent bg-primary text-white fw-bold rounded px-3 py-2 fs-5">
+                        X
+                    </div>
+
+                    <div>
+
+                        <h3 class="h5 text-white mb-2 fw-bold">
+                            Independent Variable (Features)
+                        </h3>
+
+                        <p class="text-light small mb-0 fs-6">
+                            The input metrics provided to the system.
+                            They serve as the baseline predictor.
+                            In Multiple Linear Regression, additional inputs
+                            are expressed as X₁, X₂, X₃…
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dependent Variable -->
+
+            <div class="col-12 col-md-6">
+
+                <div class="d-flex align-items-start gap-3 p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <div class="var-token dependent bg-info text-dark fw-bold rounded px-3 py-2 fs-5">
+                        y
+                    </div>
+
+                    <div>
+
+                        <h3 class="h5 text-white mb-2 fw-bold">
+                            Dependent Variable (Target)
+                        </h3>
+
+                        <p class="text-light small mb-0 fs-6">
+                            The calculated outcome that depends on input X.
+                            It represents the target attribute estimated during inference.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Training Data Description -->
+
+        <p class="text-light small mb-3 fs-6">
+            Below is an illustrative snippet of structured
+            <strong>training data</strong>.
+            Each observation links known inputs (X) with actual historical outcomes (y):
+        </p>
+
+
+        <!-- Training Data Table -->
+
+        <div class="table-responsive rounded-3">
+
+            <table class="table example-table align-middle mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col" class="py-3 px-4 fs-6">
+                            Study Hours (X)
+                        </th>
+
+                        <th scope="col" class="py-3 px-4 fs-6">
+                            Final Grade Obtained (y)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td class="py-2 px-4">
+                            2
+                        </td>
+
+                        <td class="py-2 px-4">
+                            49
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="py-2 px-4">
+                            4
+                        </td>
+
+                        <td class="py-2 px-4">
+                            62
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="py-2 px-4">
+                            6
+                        </td>
+
+                        <td class="py-2 px-4">
+                            75
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="py-2 px-4">
+                            8
+                        </td>
+
+                        <td class="py-2 px-4">
+                            84
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section id="relationship" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+                <div class="row g-4 align-items-center mb-4">
+                    <div class="col-12 col-lg-7">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-diagram-3 fs-4"></i>
+                            </div>
+                            <h2 class="h3 text-white mb-0 fw-bold">Relationship Between Variables</h2>
+                        </div>
+                        <p class="text-light fs-5 mb-3">
+                            This metric describes how the <strong class="text-white">dependent variable (y)</strong> responds to adjustments in the <strong class="text-white">independent variable (X)</strong>.
+                        </p>
+                        <p class="text-light fs-6 mb-4">
+                            Linear Regression assumes an underlying <strong>approximately linear association</strong>. Consequently, unit changes in X correspond to proportional upward or downward trends in y that can be modeled via a straight line.
+                        </p>
+                        <div class="definition-highlight p-3 rounded-3 bg-primary bg-opacity-25 border-start border-primary border-4">
+                            <strong class="text-white fs-6 d-block mb-1">Example</strong>
+                            <p class="text-light mb-0 fs-6">
+                                If X represents dedicated study hours and y indicates academic performance, higher study hours generally correspond to improved grades.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <img src="{{ url_for('static', filename='images/Correlation_examples2.webp') }}"
+                             alt="Scatter plots showing positive, negative, and zero correlation"
+                             class="img-fluid rounded-3 shadow w-100"
+                             loading="lazy"
+                             onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <strong class="text-white d-block mb-1">Positive Relationship</strong>
+                            <p class="text-light small mb-0 fs-6">As X increases, y tends to increase proportionally.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <strong class="text-white d-block mb-1">Negative Relationship</strong>
+                            <p class="text-light small mb-0 fs-6">As X increases, y tends to decrease proportionally.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <strong class="text-white d-block mb-1">No Linear Relationship</strong>
+                            <p class="text-light small mb-0 fs-6">No distinct linear trajectory is observed between X and y.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="regression-line" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+                <div class="row g-4 align-items-center">
+                    <div class="col-12 col-lg-7">
+                        <div class="mb-3 d-flex align-items-center">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-rulers fs-4"></i>
+                            </div>
+                            <h2 class="h3 text-white mb-0 fw-bold">The Regression Line</h2>
+                        </div>
+                        <p class="text-light fs-5 mb-3">
+                            Model optimization takes place during this stage. The algorithm systematically evaluates combinations of slope and intercept to identify the line that minimizes variance across all sample points.
+                        </p>
+                        <p class="text-light fs-6 mb-3">
+                            Optimization is driven by the <strong>Ordinary Least Squares (OLS)</strong> method. OLS computes individual residual errors, squares them to eliminate directional sign cancelation, and aggregates the total sum. Minimizing this aggregated metric—known as the <strong>Cost Function</strong>—yields the optimal fit.
+                        </p>
+                        <div class="d-inline-block px-3 py-2 rounded-2 bg-primary text-white fw-bold mb-3 fs-5">
+                            y = mX + b
+                        </div>
+                        <p class="text-light small mb-0 fs-6">
+                            <strong class="text-white">m (Slope):</strong> The rate of change in y per unit change in X.<br>
+                            <strong class="text-white">b (Y-Intercept):</strong> The value of y when X equals 0.
+                        </p>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="visual-frame rounded-3 overflow-hidden shadow">
+                            <img src="{{ url_for('static', filename='images/scatter-regression.png') }}"
+                                 alt="Linear regression line fitted over sample scatter plot"
+                                 class="img-fluid w-100">
+                            <div class="image-caption p-2 text-center text-light small bg-dark bg-opacity-75">
+                                Visual representation of the fitted regression line minimizing error residuals.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prediction" class="concept-section mb-5">
+
+    <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25"
+        style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+
+        <div class="d-flex align-items-center mb-3">
+
+            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px;">
+                <i class="bi bi-cpu fs-4"></i>
+            </div>
+
+            <h2 class="h3 text-white mb-0 fw-bold">
+                Prediction and Inference
+            </h2>
+
+        </div>
+
+        <p class="text-light fs-5 mb-4">
+            Upon completing training and securing optimal parameters for
+            <strong class="text-white">m</strong> and
+            <strong class="text-white">b</strong>, inference involves evaluating
+            <span class="badge bg-primary fs-6">y = mX + b</span>
+            for novel input values.
+        </p>
+
+
+        <!-- END-TO-END MACHINE LEARNING PIPELINE -->
+
+        <p class="text-primary text-uppercase fw-bold small mb-3 tracking-wider">
+            End-to-End Machine Learning Pipeline
+        </p>
+
+        <div class="row g-2 mb-5 text-center">
+
+            <!-- Historical Data -->
+
+            <div class="col-6 col-md-3">
+
+                <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <i class="bi bi-table fs-3 text-primary mb-2 d-block"></i>
+
+                    <div class="text-white fw-bold small">
+                        Historical Data
+                    </div>
+
+                    <div class="text-light opacity-75 extra-small">
+                        Known (X, y) pairs
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Model Training -->
+
+            <div class="col-6 col-md-3">
+
+                <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <i class="bi bi-gear-wide-connected fs-3 text-primary mb-2 d-block"></i>
+
+                    <div class="text-white fw-bold small">
+                        Model Training
+                    </div>
+
+                    <div class="text-light opacity-75 extra-small">
+                        Optimizing m and b
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Trained Model -->
+
+            <div class="col-6 col-md-3">
+
+                <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <i class="bi bi-sliders fs-3 text-primary mb-2 d-block"></i>
+
+                    <div class="text-white fw-bold small">
+                        Trained Model
+                    </div>
+
+                    <div class="text-light opacity-75 extra-small">
+                        y = mX + b
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Inference -->
+
+            <div class="col-6 col-md-3">
+
+                <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <i class="bi bi-check2-circle fs-3 text-success mb-2 d-block"></i>
+
+                    <div class="text-white fw-bold small">
+                        Inference
+                    </div>
+
+                    <div class="text-light opacity-75 extra-small">
+                        New X → Predicted y
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRACTICAL EXECUTION EXAMPLE -->
+
+        <p class="text-primary text-uppercase fw-bold small mb-3 tracking-wider">
+            Practical Execution Example
+        </p>
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Prediction Table -->
+
+            <div class="col-12 col-lg-6">
+
+                <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+
+                    <h4 class="text-white h5 fw-bold mb-3">
+                        Fitted Formula:
+                        <span class="text-primary">
+                            y = 5.5X + 40
+                        </span>
+                    </h4>
+
+                    <div class="table-responsive rounded-3">
+
+                        <table class="table example-table align-middle mb-0">
+
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4">
+                                        Hours (X)
+                                    </th>
+
+                                    <th class="py-3 px-4">
+                                        Actual Grade
+                                    </th>
+
+                                    <th class="py-3 px-4">
+                                        Predicted Value
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td class="py-2 px-4">
+                                        2
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        49
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        51.0
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="py-2 px-4">
+                                        6
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        75
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        73.0
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="py-2 px-4">
+                                        9
+                                        <span class="badge bg-success ms-1">
+                                            New
+                                        </span>
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        —
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        <strong class="text-white">
+                                            89.5
+                                        </strong>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Extrapolation Risk -->
+
+            <div class="col-12 col-lg-6">
+
+                <div class="p-4 rounded-3 bg-warning bg-opacity-10 border border-warning border-opacity-25 h-100">
+
+                    <h4 class="text-warning h5 fw-bold mb-2">
+
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                        Extrapolation Risk Notice
+
+                    </h4>
+
+                    <p class="text-light fs-6 mb-0">
+                        Model performance is reliable primarily within the range
+                        of training inputs. Generating estimations for domain values
+                        far beyond historical boundaries (e.g., studying 40 consecutive
+                        hours) introduces extrapolation risk, as real-world constraints
+                        often deviate from linear assumptions outside known bounds.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section id="example" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+                <h2 class="h3 text-white mb-2 fw-bold">
+                    <i class="bi bi-play-circle-fill text-primary me-2"></i>Interactive Model: Study Hours vs. Final Grade
+                </h2>
+                <p class="text-light fs-5 mb-4">
+                    Input custom study hour values below to generate real-time inferences mapped along the regression function.
+                </p>
+
+                <div class="row g-4 align-items-center">
+                    <div class="col-12 col-lg-5">
+                        <form method="post" action="{{ url_for('linear_regression_concepts') }}" class="p-4 rounded-3 bg-white bg-opacity-10">
+                            <div class="mb-3">
+                                <label for="hours" class="form-label text-white fw-bold">Study Hours Input (X)</label>
+                                <input type="number"
+                                       step="0.5"
+                                       min="0"
+                                       max="50"
+                                       class="form-control form-control-lg bg-dark text-white border-secondary"
+                                       id="hours"
+                                       name="hours"
+                                       placeholder="e.g., 10"
+                                       value="{{ hours if hours is not none else '' }}"
+                                       required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
+                                Compute Prediction
+                            </button>
+                        </form>
+
+                        {% if result is not none %}
+                        <div class="result-badge text-center mt-4 p-3 rounded-3 bg-primary bg-opacity-25 border border-primary">
+                            <span class="text-light small d-block">Estimated Final Grade (y)</span>
+                            <span class="display-5 text-white fw-bold my-1 d-block">{{ result }}</span>
+                            <span class="text-light small d-block">Based on {{ hours }} study hours</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12 col-lg-7">
+                        <div class="plot-container text-center p-3 rounded-3 bg-white bg-opacity-10">
+                            <img src="data:image/png;base64,{{ plot_url }}" alt="Linear Regression Model Output Visualisation" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <p class="text-light opacity-75 small text-center mt-5 mb-0 source-links fs-6">
+            Additional Learning Resources:
+            <a href="https://aprendeia.com/2018/11/30/algoritmo-regresion-lineal-simple-machine-learning/" target="_blank" rel="noopener" class="text-primary text-decoration-none ms-1">Linear Regression Theory – AprendeIA</a>
+            ·
+            <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank" rel="noopener" class="text-primary text-decoration-none ms-1">Linear Regression – Wikipedia</a>
+        </p>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.concept-section');
+        const navLinks = document.querySelectorAll('.path-nav a');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.25
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-target') === id) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    });
+</script>
+
+{% endblock %}

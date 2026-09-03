@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression</title>
+</head>
+<body>
+
+    <h1>Linear Regression: Calculate grade depends on study hours</h1>
+
+    <form method="post">
+        <label for="hours">Study hours</label>
+        <input type="number" step="any" name="hours" id="hours" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result is not none %}
+        <h2>Estimated Grade: {{ result }}</h2>
+    {% endif %}
+
+    {# Muestra la gráfica si la variable plot_url está disponible #}
+    {% if plot_url %}
+        <div style="margin-top: 20px;">
+            <h3>Regression Plot</h3>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Linear Regression Plot">
+        </div>
+    {% endif %}
+
+</body>
+</html>
