@@ -65,3 +65,14 @@ def LRegressionGrades():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+@app.route('/case1/')
+def case1():
+    return render_template('machine_learning/use_cases/case1.html')
+
+
+@app.route('/case2/')
+def case2():
+    return render_template('machine_learning/use_cases/case2.html')
+
