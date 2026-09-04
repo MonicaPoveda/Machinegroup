@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from LinearRegressionGraddes import calculateGrade, generate_plot
 import LinearRegressionGraddes
+import LineaR
 
 app = Flask(__name__)
 
@@ -63,9 +64,36 @@ def LRegressionGrades():
 
     return render_template('tempLinearRegression.html', result=CalculateGradeResult, plot_url=plot_url)
 
+
+@app.route("/LinearRegressionApp", methods=["GET", "POST"])
+def LRegressionDownload():
+    calculateTime_result = None
+    error_message = None
+    
+    if request.method == "POST":
+        try:
+            file_size = float(request.form["file_size"])
+            if file_size < 0:
+                error_message = "El tamaño no puede ser negativo"
+            elif file_size > 10000:
+                error_message = "El tamaño no puede ser mayor a 10000 MB"
+            else:
+                calculateTime_result = LineaR.calculateTime(file_size)
+        except ValueError:
+            error_message = "Error: Ingrese un valor numérico válido"
+        except Exception as e:
+            error_message = f"Error: {str(e)}"
+    
+    return render_template("linear_regression/applicationLR.html", 
+                         result=calculateTime_result,
+                         error=error_message)
+
 if __name__ == '__main__':
     app.run(debug=True)
-
+   
+@app.route("/use_cases")
+def use_cases():
+    return render_template("machine_learning/use_cases/use_cases.html")
 
 @app.route('/case1/')
 def case1():

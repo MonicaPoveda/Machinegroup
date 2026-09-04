@@ -205,3 +205,121 @@ body {
     color: var(--color-text-secondary);
     line-height: 1.7;
 }
+
+
+/* ============================================
+   TYPES OF ML PAGE
+============================================ */
+
+/* Page Title */
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.page-title .highlight {
+    background: linear-gradient(135deg, var(--color-accent), #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glass Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    color: var(--color-accent);
+}
+
+.glass-card h4 {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.glass-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+/* Icon Circle */
+.icon-circle-card {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(13, 202, 240, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    border: 1px solid rgba(13, 202, 240, 0.3);
+}
+
+.icon-circle-card i {
+    font-size: 2rem;
+    color: #0dcaf0;
+}
+
+/* Custom Badges */
+.badge-custom {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+/* Algorithm Tags */
+.algo-tag {
+    display: inline-block;
+    background: rgba(13, 202, 240, 0.15);
+    border: 1px solid rgba(13, 202, 240, 0.3);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    color: #0dcaf0;
+    margin: 3px;
+}
+
+/* ML Comparison Table */
+.table-ml {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table-ml thead {
+    background: linear-gradient(135deg, #0dcaf0, #6610f2);
+}
+
+.table-ml th,
+.table-ml td {
+    padding: 15px 20px;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-ml td {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.table-ml td strong {
+    color: white;
+}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Linear Regression Application{% endblock %}
+
+{% block content %}
+
+<div class="container py-5" style="padding-top: 120px !important;">
+
+    <!-- HEADER -->
+    <div class="text-center mb-5">
+        <div class="section-label mb-3">
+            SUPERVISED LEARNING
+        </div>
+        <h1 class="display-2 fw-bold text-white">
+            Linear Regression <span class="brand-highlight">Application</span>
+        </h1>
+        <p class="section-description mx-auto mt-4">
+            Predict download time based on file size using a Linear Regression model.
+        </p>
+    </div>
+
+    <!-- TARJETA PRINCIPAL -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+
+            <!-- CONTEXTO -->
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-info-circle"></i> Problem Context
+            </h2>
+            <p class="card-text">
+                This analysis examines the relationship between 
+                <strong class="text-white">file size (MB)</strong> and 
+                <strong class="text-white">download time (seconds)</strong>.
+            </p>
+            <p class="card-text">
+                The goal is to predict how long it will take to download a file 
+                based on its size.
+            </p>
+
+            <hr class="border-secondary">
+
+            <!-- ERROR -->
+            {% if error %}
+            <div class="alert alert-danger text-center">
+                <i class="bi bi-exclamation-triangle"></i> {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- FORMULARIO -->
+            <form method="post">
+                <div class="mb-3">
+                    <label for="file_size" class="form-label text-white fw-bold">
+                        <i class="bi bi-file-earmark"></i> File Size (MB)
+                    </label>
+                    <input type="number" 
+                           step="0.1" 
+                           min="0" 
+                           class="form-control form-control-lg bg-dark text-white border-secondary" 
+                           id="file_size" 
+                           name="file_size" 
+                           placeholder="Ej: 500, 1500, 2500..."
+                           value="{{ file_size if file_size is not none else '' }}"
+                           required>
+                    <small class="text-white-50">
+                        Enter a value between 10 and 5000 MB
+                    </small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
+                    <i class="bi bi-rocket-takeoff"></i> Predict Download Time
+                </button>
+            </form>
+
+            <!-- RESULTADO -->
+            {% if result is not none and not error %}
+            <div class="mt-4 p-4 rounded-3" style="background: rgba(13, 202, 240, 0.1); border: 1px solid rgba(13, 202, 240, 0.3);">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-md-start">
+                        <h5 class="text-light">
+                            <i class="bi bi-check-circle text-success"></i> Prediction Result
+                        </h5>
+                        <p class="text-white-50">
+                            Estimated download time:
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h2 class="display-4 fw-bold text-success">
+                            {{ result }} s
+                        </h2>
+                        <span class="badge bg-success">Predicted Download Time</span>
+                        {% if result %}
+                        <div class="mt-1">
+                            <small class="text-white-50">
+                                ≈ {{ (result/60)|round(1) }} minutes
+                            </small>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- BACK BUTTON -->
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-outline-light btn-lg px-5 rounded-pill">
+                    <i class="bi bi-arrow-left"></i> Back to Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
