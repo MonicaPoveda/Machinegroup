@@ -18,6 +18,8 @@ df = pd.DataFrame(data)
 x = df[["Study Hours"]]
 y = df[["Final Grade"]]
 
+
+
 model = LinearRegression()
 model.fit(x, y)
 
@@ -26,6 +28,14 @@ def calculateGrade(hours):
     result = model.predict([[hours]])[0]
     return result
 
+
+
+
+
+
+
+
+
 def generate_plot(predicted_hours=None, predicted_grade=None):
     """Genera la gráfica estilizada en base64."""
     fig, ax = plt.subplots(figsize=(7, 3.8), dpi=100)
@@ -33,10 +43,10 @@ def generate_plot(predicted_hours=None, predicted_grade=None):
     fig.patch.set_facecolor("#ffffff")
     ax.set_facecolor("#ffffff")
     
-    ax.scatter(df["Study Hours"], df["Final Grade"], color='#1478ff', alpha=0.8, edgecolors='white', linewidth=0.5, label='Historical Data', s=45)
+    ax.scatter(df["Study Hours"], df["Final Grade"],                                                                                             color='#1478ff', alpha=0.8, edgecolors='white', linewidth=0.5, label='Historical Data', s=45)
     
     y_pred = model.predict(x)
-    ax.plot(df["Study Hours"], y_pred, color='#00d2ff', linewidth=2, label='Regression Line')
+    ax.plot(df["Study Hours"], y_pred,                                                                                                                  color='#00d2ff', linewidth=2, label='Regression Line')
     
     if predicted_hours is not None and predicted_grade is not None:
         # Extrae el valor escalar si la predicción viene como array de NumPy
@@ -56,6 +66,8 @@ def generate_plot(predicted_hours=None, predicted_grade=None):
     ax.legend(facecolor="#A4E0F6FF", edgecolor='#1478ff59', labelcolor="#000000", fontsize=8)
     
     plt.tight_layout()
+
+
     
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png', facecolor=fig.get_facecolor(), edgecolor='none')
@@ -64,3 +76,98 @@ def generate_plot(predicted_hours=None, predicted_grade=None):
     plt.close(fig)
     
     return image_base64
+
+
+
+
+
+
+
+# def generate_plot(predicted_hours=None, predicted_grade=None):
+#     # Create the graph
+#     fig, ax = plt.subplots(figsize=(7, 3.8), dpi=100)
+
+#     # Show historical data
+#     ax.scatter(
+#         df["Study Hours"],
+#         df["Final Grade"],
+#         alpha=0.8,
+#         label="Historical Data"
+#     )
+
+#     # Generate regression predictions
+#     y_pred = model.predict(x)
+
+#     # Draw regression line
+#     ax.plot(
+#         df["Study Hours"],
+#         y_pred,
+#         linewidth=2,
+#         label="Regression Line"
+#     )
+
+#     # Show the new prediction on the graph
+#     if predicted_hours is not None and predicted_grade is not None:
+
+#         val_grade = float(predicted_grade[0]) \
+#             if hasattr(predicted_grade, "__len__") \
+#             else float(predicted_grade)
+
+#         ax.scatter(
+#             [predicted_hours],
+#             [val_grade],
+#             s=100,
+#             label=f"Prediction ({predicted_hours}h)"
+#         )
+
+#         ax.annotate(
+#             f"{val_grade:.2f}",
+#             (predicted_hours, val_grade),
+#             textcoords="offset points",
+#             xytext=(0, 10),
+#             ha="center"
+#         )
+
+#     # Configure graph information
+#     ax.set_title("Study Hours vs Final Grade")
+#     ax.set_xlabel("Study Hours")
+#     ax.set_ylabel("Final Grade")
+
+#     ax.grid(True)
+#     ax.legend()
+
+#     plt.tight_layout()
+
+#     # Convert the graph to Base64
+#     buffer = io.BytesIO()
+
+#     plt.savefig(
+#         buffer,
+#         format="png"
+#     )
+
+#     buffer.seek(0)
+
+#     image_base64 = base64.b64encode(
+#         buffer.getvalue()
+#     ).decode("utf-8")
+
+#     plt.close(fig)
+
+#     return image_base64 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

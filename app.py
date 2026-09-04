@@ -1,6 +1,17 @@
 from flask import Flask, render_template, request
 import LinearRegressionGraddes
-import LineaR
+
+from LinearRegressionApplication import (
+    data,
+    data_preview,
+    model,
+    num_records,
+    coefficient,
+    intercept,
+    plot_url,
+    predict_download_time
+)
+
 
 app = Flask(__name__)
 
@@ -42,7 +53,45 @@ def linear_regression_concepts():
         plot_url=plot_url
     )
 
+#Application of Linear Regression
+@app.route("/linear_regression/application",methods=["GET", "POST"])
 
+def linear_regression_application():
+
+    prediction = None
+    error = None
+    file_size = None
+
+    if request.method == "POST":
+        value = request.form.get("file_size", "").strip()
+        if not value:
+            error = "Please enter a file size."
+        else:
+            try:
+                file_size = float(value)
+                if file_size <= 0:
+                    error = "File size must be greater than 0."
+                else:
+                    prediction = predict_download_time(file_size)
+                    prediction = round(prediction, 2)
+            except ValueError:
+                error = "Please enter a valid numeric value."
+
+    # Convert the complete dataset to dictionaries
+    data_full = data[["file_size_mb", "download_time_sec"]].to_dict("records")
+
+    return render_template(
+        "linear_regression/applicationLR.html",
+        num_records=num_records,
+        data_preview=data_preview,
+        data_full=data_full,
+        plot_url=plot_url,
+        prediction=prediction,
+        file_size=file_size,
+        error=error,
+        coefficient=coefficient,
+        intercept=intercept
+    )
 
 
 
