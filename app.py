@@ -88,9 +88,6 @@ def LRegressionDownload():
                          result=calculateTime_result,
                          error=error_message)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-   
 @app.route("/use_cases")
 def use_cases():
     return render_template("machine_learning/use_cases/use_cases.html")
@@ -104,3 +101,17 @@ def case1():
 def case2():
     return render_template('machine_learning/use_cases/case2.html')
 
+@app.route('/case3/')
+def case3():
+    return render_template('machine_learning/use_cases/case3.html')
+
+@app.route('/case4/')
+def case4():
+    return render_template('machine_learning/use_cases/case4.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+   
+
+   
