@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from LinearRegressionGraddes import calculateGrade, generate_plot
 import LinearRegressionGraddes
 import LineaR
 
@@ -34,7 +33,7 @@ def linear_regression_concepts():
         except (ValueError, TypeError):
             result = None
 
-    plot_url = generate_plot(predicted_hours=hours, predicted_grade=result)
+    plot_url = LinearRegressionGraddes.generate_plot(predicted_hours=hours, predicted_grade=result)
     
     return render_template(
         'linear_regression/conceptsLR.html',
@@ -112,6 +111,4 @@ def case4():
 
 if __name__ == '__main__':
     app.run(debug=True)
-   
-
-   
+    
