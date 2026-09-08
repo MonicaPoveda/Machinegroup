@@ -58,6 +58,7 @@
                             <li><a class="dropdown-item" href="{{ url_for('what_is_ml') }}">Concepts</a></li>
                             <!-- Link to ML Types -->
                             <li><a class="dropdown-item" href="{{ url_for('types') }}">Types of Machine Learning</a></li>
+                            
                             <li><hr class="dropdown-divider"></li>
                             <li><span class="dropdown-header">Use Cases</span></li>
                             
@@ -74,15 +75,40 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Supervised
                         </a>
+
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><span class="dropdown-header">Linear Regression</span></li>
-                            <!-- Temporary disabled links for Linear Regression -->
+                            
                               <!-- Link to ML Concepts -->
                             <li><a class="dropdown-item" href="{{ url_for('linear_regression_concepts') }}">Concepts</a></li>
-
+                             <!-- Link to ML Application -->
                             <li><a class="dropdown-item" href="{{ url_for('linear_regression_application') }}">Application</a></li>
 
+                            <li><hr class="dropdown-divider"></li>
+                            <li><span class="dropdown-header">Logistic Regression</span></li>
+                            
+                            <!--  links for topics Logistic Regression -->
+                            <li><a class="dropdown-item" href="#">Concepts</a></li>
+                            <li><a class="dropdown-item" href="#">Application</a></li>
+                            <li><a class="dropdown-item" href="#">Evaluation Metrics</a></li>
+
+                            <li><hr class="dropdown-divider"></li>
+                            <li><span class="dropdown-header">Support Vector Machine (SVM)</span></li>
+
+                            <!--  links for topics Support Vector Machine (SVM) -->
+                            <li><a class="dropdown-item" href="#">Concepts</a></li>
+                            <li><a class="dropdown-item" href="#">Application</a></li>
+                            <li><a class="dropdown-item" href="#">Evaluation Metrics</a></li>
+
+
+
                         </ul>
+
+
+                        
+
+                        
+                    
                     </li>
 
                 </ul>
