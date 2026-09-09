@@ -377,55 +377,202 @@ Application - SVM
                         </div>
                     </div>
 
-                    <!--   Algorithm -->
-                    <div class="col-12 col-md-6">
-                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-diagram-3 text-primary fs-4 me-3"></i>
+                    <div class="row g-3 align-items-stretch">
 
-                                <h5 class="text-white fw-bold mb-0">
-                                    SVM Configuration
-                                </h5>
+    <!-- SVM Configuration -->
+    <div class="col-12 col-md-6 d-flex">
+        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100 w-100 d-flex flex-column">
+
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-diagram-3 text-primary fs-4 me-3"></i>
+                <h5 class="text-white fw-bold mb-0">
+                    SVM Configuration
+                </h5>
+            </div>
+
+            <p class="text-light small mb-3">
+                The classifier uses a
+                <strong class="text-white">Support Vector Machine (SVM)</strong>
+                with a
+                <strong class="text-white">linear kernel</strong>
+                to separate the two possible classes.
+            </p>
+
+            <p class="text-light small mb-3">
+                The model is configured with
+                <strong class="text-white">C = 1.0</strong>,
+                which controls the balance between classification errors
+                and the separation of the classes.
+            </p>
+
+            <p class="text-light small mb-4">
+                Before training, the four input variables are standardized
+                using
+                <strong class="text-white">StandardScaler</strong>.
+            </p>
+
+            <!-- SVM Process Visualization -->
+            <div class="p-3 rounded-3 bg-dark bg-opacity-50 mt-auto">
+
+                <div class="text-primary text-uppercase fw-bold small mb-3">
+                    Model Configuration
+                </div>
+
+                <div class="row g-2 text-center">
+
+                    <div class="col-4">
+                        <div class="p-2 rounded-3 bg-white bg-opacity-10 h-100">
+                            <i class="bi bi-input-cursor-text text-primary fs-4"></i>
+                            <div class="text-white small fw-semibold mt-2">
+                                Input Variables
                             </div>
-
-                            <p class="text-light small mb-0">
-                                The classifier uses a
-                                <strong class="text-white">linear kernel</strong>
-                                with
-                                <strong class="text-white">C = 1.0</strong>.
-                                The model is trained using the standardized
-                                training data.
-                            </p>
+                            <div class="text-light opacity-75" style="font-size: 0.7rem;">
+                                4 features
+                            </div>
                         </div>
                     </div>
 
-                    <!--   Dataset -->
-                    <div class="col-12 col-md-6">
-                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-database text-primary fs-4 me-3"></i>
-
-                                <h5 class="text-white fw-bold mb-0">
-                                    Dataset and Training
-                                </h5>
+                    <div class="col-4">
+                        <div class="p-2 rounded-3 bg-white bg-opacity-10 h-100">
+                            <i class="bi bi-sliders text-primary fs-4"></i>
+                            <div class="text-white small fw-semibold mt-2">
+                                Standardization
                             </div>
+                            <div class="text-light opacity-75" style="font-size: 0.7rem;">
+                                StandardScaler
+                            </div>
+                        </div>
+                    </div>
 
-                            <p class="text-light small mb-0">
-                                The data are loaded from the
-                                <strong class="text-white">diabetes.csv</strong>
-                                file using Pandas. The dataset is divided
-                                into
-                                <strong class="text-white">80% for training</strong>
-                                and
-                                <strong class="text-white">20% for testing</strong>
-                                using a fixed random state of 42.
-                            </p>
+                    <div class="col-4">
+                        <div class="p-2 rounded-3 bg-white bg-opacity-10 h-100">
+                            <i class="bi bi-diagram-3 text-primary fs-4"></i>
+                            <div class="text-white small fw-semibold mt-2">
+                                SVM
+                            </div>
+                            <div class="text-light opacity-75" style="font-size: 0.7rem;">
+                                Linear Kernel
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-3">
+                    <i class="bi bi-arrow-down text-primary"></i>
+                </div>
+
+                <div class="row g-2 mt-1">
+
+                    <div class="col-6">
+                        <div class="p-2 rounded-3 bg-success bg-opacity-10 border border-success border-opacity-25 text-center">
+                            <span class="badge bg-success">
+                                Class 0
+                            </span>
+                            <div class="text-light small mt-2">
+                                No Diabetes
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="p-2 rounded-3 bg-danger bg-opacity-10 border border-danger border-opacity-25 text-center">
+                            <span class="badge bg-danger">
+                                Class 1
+                            </span>
+                            <div class="text-light small mt-2">
+                                Diabetes
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </section>
+
+        </div>
+    </div>
+
+    <!-- Dataset and Training -->
+    <div class="col-12 col-md-6 d-flex">
+        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100 w-100 d-flex flex-column">
+
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-database text-primary fs-4 me-3"></i>
+                <h5 class="text-white fw-bold mb-0">
+                    Dataset and Training
+                </h5>
+            </div>
+
+            <p class="text-light small mb-3">
+                The data are loaded from the
+                <strong class="text-white">diabetes.csv</strong>
+                file using Pandas. The dataset is divided into
+                <strong class="text-white">80% for training</strong>
+                and
+                <strong class="text-white">20% for testing</strong>
+                using a fixed random state of 42.
+            </p>
+
+            <div class="row g-2 text-center">
+
+                <div class="col-12">
+                    <div class="p-2 rounded-3 bg-primary bg-opacity-25">
+                        <div class="text-light small">
+                            Total Records
+                        </div>
+                        <div class="text-white fw-bold fs-5">
+                            {{ num_records }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-2 rounded-3 bg-white bg-opacity-10 h-100">
+                        <div class="text-light small">
+                            Training Data
+                        </div>
+                        <div class="text-white fw-bold fs-5">
+                            {{ num_train }}
+                        </div>
+                        <div class="text-light opacity-75 small">
+                            80%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-2 rounded-3 bg-white bg-opacity-10 h-100">
+                        <div class="text-light small">
+                            Test Data
+                        </div>
+                        <div class="text-white fw-bold fs-5">
+                            {{ num_test }}
+                        </div>
+                        <div class="text-light opacity-75 small">
+                            20%
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-auto pt-4">
+                <div class="p-3 rounded-3 bg-dark bg-opacity-50">
+                    <div class="text-primary text-uppercase fw-bold small mb-2">
+                        Training Process
+                    </div>
+
+                    <p class="text-light opacity-75 small mb-0">
+                        The model learns from the training data and uses the
+                        test data to evaluate its classification performance.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
         <!--   3. GRAPH VISUALIZATION -->
         <section id="visualization" class="concept-section mb-5">

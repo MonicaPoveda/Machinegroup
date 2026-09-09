@@ -2,14 +2,19 @@ from flask import Flask, render_template, request
 
 #from SVM import msv_model, scaler
 from SVM import (
-    msv_model, scaler, accuracy, precision, recall, f1,
-    conf_matrix, data_plot_url, confusion_plot_url,
-    num_records, num_train, num_test, interpretation
+    msv_model,
+    scaler,
+    accuracy,
+    precision, recall, f1,
+    conf_matrix, data_plot_url,
+    confusion_plot_url,
+    num_records ,
+      num_train, num_test, interpretation
 )
 import LinearRegressionGraddes
 
 from LinearRegressionApplication import (
-    data, data_preview, model as model_lr, num_records,
+    data, data_preview, model as model_lr, num_records as lr_num_records,
     coefficient, intercept, plot_url, predict_download_time
 )
 
@@ -87,7 +92,7 @@ def linear_regression_application():
 
     return render_template(
         "linear_regression/applicationLR.html",
-        num_records=num_records,
+        num_records=lr_num_records,
         data_preview=data_preview,
         data_full=data_full,
         plot_url=plot_url,
