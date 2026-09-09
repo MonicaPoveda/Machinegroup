@@ -1,496 +1,884 @@
 {% extends "base.html" %}
 
-{% block title %}Aplicación - SVM{% endblock %}
+{% block title %}
+Application - SVM
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concepts.css') }}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<!--   Main page container -->
+<div class="concepts-page pt-5 mt-5 pb-5">
+    <div class="container">
 
-    <!-- ================================================== -->
-    <!-- ENCABEZADO -->
-    <!-- ================================================== -->
+        <!--   Page header -->
+        <div class="text-center mb-5">
+            <span class="section-label text-uppercase fw-bold text-primary">
+                <span class="section-line"></span>
+                SUPERVISED LEARNING
+                <span class="section-line"></span>
+            </span>
 
-    <div class="text-center mb-5">
+            <h1 class="section-title display-4 fw-bold text-white mt-2 mb-3">
+                SVM Application
+            </h1>
 
-        <h1 class="fw-bold">
-            Detección de Diabetes
-        </h1>
+            <p class="section-description mx-auto lead text-light fs-5 max-w-760">
+                Explore a practical application of the Support Vector Machine
+                (SVM) algorithm to classify patient observations according
+                to the presence or absence of diabetes.
+            </p>
+        </div>
 
-        <p class="text-muted">
-            Aplicación del algoritmo Support Vector Machine (SVM)
-        </p>
+        <!--  Learning path navigation -->
+        <nav class="path-nav mb-5" id="pathNav" aria-label="Learning path">
+            <a href="#context" data-target="context">Context</a>
+            <a href="#model-info" data-target="model-info">Model Information</a>
+            <a href="#visualization" data-target="visualization">Visualization</a>
+            <a href="#classification" data-target="classification">Classification</a>
+        </nav>
 
-    </div>
-    <!-- ================================================== -->
-    <!-- INFORMACIÓN DEL MODELO -->
-    <!-- ================================================== -->
+        <!--  1. PROBLEM CONTEXT -->
+        <section id="context" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25"
+                 style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
 
-    <div class="card shadow-sm border-0 mt-4">
+                <div class="row align-items-center g-4">
 
-        <div class="card-body p-4">
+                    <!--   Problem description -->
+                    <div class="col-12 col-lg-7">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                                 style="width: 50px; height: 50px;">
+                                <i class="bi bi-heart-pulse fs-4"></i>
+                            </div>
 
-            <h3 class="fw-bold mb-4">
-                Información del modelo
-            </h3>
+                            <div>
+                                <h2 class="h3 text-white mb-0 fw-bold">
+                                    Problem Context
+                                </h2>
+                            </div>
+                        </div>
 
-            <div class="row g-4">
+                        <p class="text-light fs-5 mb-4">
+                            Diabetes is a chronic disease associated with
+                            elevated blood glucose levels and can be
+                            identified through the analysis of different
+                            clinical and physiological measurements.
+                            Therefore, classification techniques can be
+                            applied to identify patterns associated with
+                            the presence or absence of the disease.
+                        </p>
 
-                <div class="col-md-6">
+                        <p class="text-light fs-5 mb-4">
+                            In this application, a
+                            <strong class="text-white">Support Vector Machine (SVM)</strong>
+                            classifier is used to analyze patient data and
+                            assign each observation to one of two classes:
+                            non-diabetic or diabetic.
+                        </p>
 
-                    <h5 class="fw-bold">
-                        Variables independientes (X)
-                    </h5>
+                        <!--   Purpose -->
+                        <div class="definition-highlight p-3 rounded-3 bg-primary bg-opacity-25 border-start border-primary border-4">
+                            <strong class="text-white fs-6 d-block mb-1">
+                                Purpose of the application
+                            </strong>
 
-                    <ul class="text-muted">
+                            <p class="text-light mb-0 fs-6">
+                                The application uses the trained SVM model to
+                                classify a new patient observation according
+                                to the values entered for the clinical
+                                variables.
+                            </p>
+                        </div>
+                    </div>
 
-                        <li>
-                            <strong>Glucosa:</strong>
-                            nivel de glucosa en plasma a las 2 horas.
-                        </li>
+                    <!--   Classification flow -->
+                    <div class="col-12 col-lg-5">
+                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+                            <p class="text-primary text-uppercase fw-bold small mb-4">
+                                Classification Objective
+                            </p>
 
-                        <li>
-                            <strong>Presión arterial:</strong>
-                            presión arterial diastólica en mm Hg.
-                        </li>
+                            <div class="text-center">
+                                <div class="mb-2 text-light small">
+                                    Patient information
+                                </div>
 
-                        <li>
-                            <strong>IMC:</strong>
-                            índice de masa corporal en kg/m².
-                        </li>
+                                <div class="h5 text-white fw-bold mb-3">
+                                    Glucose · Blood Pressure · BMI · Age
+                                </div>
 
-                        <li>
-                            <strong>Edad:</strong>
-                            edad del paciente en años.
-                        </li>
+                                <i class="bi bi-arrow-down text-primary fs-3"></i>
 
-                    </ul>
+                                <div class="my-3">
+                                    <span class="badge bg-primary px-3 py-2">
+                                        SVM CLASSIFIER
+                                    </span>
+                                </div>
 
-                </div>
+                                <i class="bi bi-arrow-down text-primary fs-3"></i>
 
+                                <div class="mt-3 mb-2 text-light small">
+                                    Predicted class
+                                </div>
 
-                <div class="col-md-6">
+                                <div class="h4 text-white fw-bold">
+                                    Diabetes Outcome
+                                </div>
 
-                    <h5 class="fw-bold">
-                        Variable objetivo (y)
-                    </h5>
+                                <div class="mt-2">
+                                    <span class="badge bg-success me-2">
+                                        0 = No diabetes
+                                    </span>
 
-                    <p class="text-muted">
-                        <strong>Outcome / Resultado:</strong>
-                        variable de clasificación utilizada para
-                        determinar la clase del paciente.
-                    </p>
-
-                    <div class="mt-3">
-
-                        <span class="badge bg-success me-2">
-                            0 = Sano
-                        </span>
-
-                        <span class="badge bg-danger">
-                            1 = Diabético
-                        </span>
-
+                                    <span class="badge bg-danger">
+                                        1 = Diabetes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
+                <!--   CONTEXT QUESTIONS (7) -->
+                <div class="row g-3 mt-4">
+
+                    <!--   Question 1 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-question-circle-fill text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What problem is being analyzed?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        The problem consists of classifying
+                                        patient observations according to
+                                        whether they belong to the diabetic
+                                        or non-diabetic class.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   Question 2 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-database text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What do the data represent?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        Each record represents a patient
+                                        observation containing clinical
+                                        measurements and its corresponding
+                                        diabetes classification.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   Question 3 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-input-cursor-text text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What are the independent variables?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        The independent variables are
+                                        Glucose, BloodPressure, BMI and Age,
+                                        which provide the information used
+                                        by the classifier.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   Question 4 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-bullseye text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What is the target variable?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        The target variable is
+                                        <strong class="text-white">Outcome</strong>,
+                                        which represents the class assigned
+                                        to each patient observation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   Question 5 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-diagram-3 text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What are the possible classes?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        The model works with two possible
+                                        classes:
+                                        <strong class="text-white">0 = No diabetes</strong>
+                                        and
+                                        <strong class="text-white">1 = Diabetes</strong>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   Question 6 -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-cpu text-primary fs-4"></i>
+
+                                <div>
+                                    <strong class="text-white d-block mb-1">
+                                        What does the model classify?
+                                    </strong>
+
+                                    <p class="text-light small mb-0">
+                                        The SVM classifies a new patient
+                                        observation as belonging to the
+                                        non-diabetic or diabetic class.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+        </section>
 
+        <!--   2. MODEL INFORMATION -->
+        <section id="model-info" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25"
+                 style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
 
-            <hr class="my-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                         style="width: 50px; height: 50px;">
+                        <i class="bi bi-cpu fs-4"></i>
+                    </div>
 
-
-            <div class="row text-center">
-
-                <div class="col-md-4">
-
-                    <h5 class="fw-bold">
-                        Algoritmo
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        SVM con kernel lineal
-                    </p>
-
+                    <div>
+                        <h2 class="h3 text-white mb-0 fw-bold">
+                            Model Information
+                        </h2>
+                    </div>
                 </div>
 
-                <div class="col-md-4">
+                <p class="text-light fs-5 mb-4">
+                    The application uses a
+                    <strong class="text-white">Support Vector Machine (SVM)</strong>
+                    with a linear kernel to perform binary classification.
+                    The model is trained using four independent variables
+                    obtained from the diabetes dataset.
+                </p>
 
-                    <h5 class="fw-bold">
-                        Datos
-                    </h5>
+                <div class="row g-3">
 
-                    <p class="text-muted mb-0">
-                        {{ num_records }} registros
-                    </p>
+                    <!--   Variables -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-bar-chart-line text-primary fs-4 me-3"></i>
 
-                </div>
-
-                <div class="col-md-4">
-
-                    <h5 class="fw-bold">
-                        División
-                    </h5>
-
-                    <p class="text-muted mb-0">
-                        80% entrenamiento / 20% prueba
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ================================================== -->
-    <!-- FORMULARIO + RESULTADO -->
-    <!-- ================================================== -->
-
-    <div class="row g-4">
-
-        <!-- FORMULARIO -->
-
-        <div class="col-lg-6">
-
-            <div class="card shadow-sm border-0 mt-4">
-
-                <div class="card-body p-4">
-
-                    <h3 class="fw-bold mb-3">
-                        Ingrese los datos del paciente
-                    </h3>
-
-                    <p class="text-muted mb-4">
-                        Introduzca los valores biométricos para realizar
-                        la predicción mediante el modelo SVM.
-                    </p>
-
-
-                    <form method="POST">
-
-                        <!-- Glucosa -->
-
-                        <div class="mb-3">
-
-                            <label
-                                for="glucose"
-                                class="form-label fw-semibold"
-                            >
-                                Glucosa
-                            </label>
-
-                            <input
-                                type="number"
-                                step="any"
-                                min="0"
-                                class="form-control"
-                                id="glucose"
-                                name="glucose"
-                                placeholder="Ej. 120"
-                                value="{{ glucose if glucose is not none else '' }}"
-                                required
-                            >
-
-                            <div class="form-text">
-                                Nivel de glucosa en plasma a las 2 horas
-                                (mg/dL).
+                                <h5 class="text-white fw-bold mb-0">
+                                    Input Variables (X)
+                                </h5>
                             </div>
 
+                            <ul class="text-light small mb-0">
+                                <li class="mb-2">
+                                    <strong class="text-white">Glucose:</strong>
+                                    plasma glucose concentration.
+                                </li>
+
+                                <li class="mb-2">
+                                    <strong class="text-white">BloodPressure:</strong>
+                                    diastolic blood pressure.
+                                </li>
+
+                                <li class="mb-2">
+                                    <strong class="text-white">BMI:</strong>
+                                    Body Mass Index.
+                                </li>
+
+                                <li>
+                                    <strong class="text-white">Age:</strong>
+                                    patient's age in years.
+                                </li>
+                            </ul>
                         </div>
+                    </div>
 
+                    <!--   Target -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-bullseye text-primary fs-4 me-3"></i>
 
-                        <!-- Presión arterial -->
-
-                        <div class="mb-3">
-
-                            <label
-                                for="blood_pressure"
-                                class="form-label fw-semibold"
-                            >
-                                Presión arterial
-                            </label>
-
-                            <input
-                                type="number"
-                                step="any"
-                                min="0"
-                                class="form-control"
-                                id="blood_pressure"
-                                name="blood_pressure"
-                                placeholder="Ej. 72"
-                                value="{{ blood_pressure if blood_pressure is not none else '' }}"
-                                required
-                            >
-
-                            <div class="form-text">
-                                Presión arterial diastólica (mm Hg).
+                                <h5 class="text-white fw-bold mb-0">
+                                    Target Variable (Y)
+                                </h5>
                             </div>
 
-                        </div>
-
-
-                        <!-- IMC -->
-
-                        <div class="mb-3">
-
-                            <label
-                                for="bmi"
-                                class="form-label fw-semibold"
-                            >
-                                IMC
-                            </label>
-
-                            <input
-                                type="number"
-                                step="any"
-                                min="0"
-                                class="form-control"
-                                id="bmi"
-                                name="bmi"
-                                placeholder="Ej. 25.5"
-                                value="{{ bmi if bmi is not none else '' }}"
-                                required
-                            >
-
-                            <div class="form-text">
-                                Índice de Masa Corporal (kg/m²).
-                            </div>
-
-                        </div>
-
-
-                        <!-- Edad -->
-
-                        <div class="mb-4">
-
-                            <label
-                                for="age"
-                                class="form-label fw-semibold"
-                            >
-                                Edad
-                            </label>
-
-                            <input
-                                type="number"
-                                step="any"
-                                min="0"
-                                class="form-control"
-                                id="age"
-                                name="age"
-                                placeholder="Ej. 35"
-                                value="{{ age if age is not none else '' }}"
-                                required
-                            >
-
-                            <div class="form-text">
-                                Edad del paciente en años.
-                            </div>
-
-                        </div>
-
-
-                        <!-- Error -->
-
-                        {% if error %}
-
-                        <div
-                            class="alert alert-danger"
-                            role="alert"
-                        >
-                            {{ error }}
-                        </div>
-
-                        {% endif %}
-
-
-                        <!-- Botón -->
-
-                        <div class="d-grid">
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary btn-lg"
-                            >
-                                Realizar predicción
-                            </button>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================================================== -->
-        <!-- RESULTADO -->
-        <!-- ================================================== -->
-
-        <div class="col-lg-6">
-
-            <div class="card shadow-sm border-0 mt-4">
-
-                <div class="card-body p-4">
-
-                    <h3 class="fw-bold mb-3">
-                        Resultado de la predicción
-                    </h3>
-
-
-                    {% if prediction is not none %}
-
-                        {% if prediction == 1 %}
-
-                        <div class="alert alert-danger text-center py-4">
-
-                            <h2 class="fw-bold">
-                                Resultado: Riesgo de diabetes
-                            </h2>
-
-                            <p class="mb-0">
-                                El modelo SVM ha clasificado al paciente
-                                como <strong>1 (Diabético)</strong>.
+                            <p class="text-light small mb-3">
+                                The target variable is
+                                <strong class="text-white">Outcome</strong>,
+                                which defines the classification assigned
+                                to each observation.
                             </p>
 
+                            <div>
+                                <span class="badge bg-success me-2">
+                                    0 = No diabetes
+                                </span>
+
+                                <span class="badge bg-danger">
+                                    1 = Diabetes
+                                </span>
+                            </div>
                         </div>
+                    </div>
+
+                    <!--   Algorithm -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-diagram-3 text-primary fs-4 me-3"></i>
+
+                                <h5 class="text-white fw-bold mb-0">
+                                    SVM Configuration
+                                </h5>
+                            </div>
+
+                            <p class="text-light small mb-0">
+                                The classifier uses a
+                                <strong class="text-white">linear kernel</strong>
+                                with
+                                <strong class="text-white">C = 1.0</strong>.
+                                The model is trained using the standardized
+                                training data.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!--   Dataset -->
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-3 bg-white bg-opacity-10 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-database text-primary fs-4 me-3"></i>
+
+                                <h5 class="text-white fw-bold mb-0">
+                                    Dataset and Training
+                                </h5>
+                            </div>
+
+                            <p class="text-light small mb-0">
+                                The data are loaded from the
+                                <strong class="text-white">diabetes.csv</strong>
+                                file using Pandas. The dataset is divided
+                                into
+                                <strong class="text-white">80% for training</strong>
+                                and
+                                <strong class="text-white">20% for testing</strong>
+                                using a fixed random state of 42.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!--   3. GRAPH VISUALIZATION -->
+        <section id="visualization" class="concept-section mb-5">
+            <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25"
+                 style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                         style="width: 50px; height: 50px;">
+                        <i class="bi bi-graph-up fs-4"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="h3 text-white mb-0 fw-bold">
+                            Data Visualization
+                        </h2>
+                    </div>
+                </div>
+
+                <p class="text-light fs-5">
+                    The visualization represents the distribution of the
+                    observations according to selected clinical variables,
+                    differentiating the two Outcome classes. The
+                    representation helps identify patterns and differences
+                    between the observations used by the classification
+                    problem.
+                </p>
+
+                <div class="text-center mt-4">
+                    <img
+                        src="data:image/png;base64,{{ data_plot_url }}"
+                        class="img-fluid rounded"
+                        alt="Gráfica de distribución de pacientes"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <!--   4. classification prediction -->
+        <section id="classification" class="concept-section mb-5">
+
+            <!--   FORMS + RESULTS -->
+            <div class="row g-4">
+
+                <!--   FORM -->
+                <div class="col-12 col-lg-6">
+                    <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25 h-100"
+                         style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+
+                        <!--   Encabezado del formulario -->
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                                 style="width: 50px; height: 50px;">
+                                <i class="bi bi-clipboard2-pulse fs-4"></i>
+                            </div>
+
+                            <div>
+                                <h2 class="h3 text-white mb-1 fw-bold">
+                                    Patient Data
+                                </h2>
+
+                                <span class="text-primary small fw-semibold">
+                                    SVM CLASSIFICATION
+                                </span>
+                            </div>
+                        </div>
+
+                        <p class="text-light fs-6 mb-4">
+                            Enter the clinical and demographic values required by the
+                            trained Support Vector Machine model to obtain a
+                            classification.
+                        </p>
+
+                        <form method="POST">
+
+                            <!--   GLUCOSA -->
+                            <div class="mb-4">
+                                <label for="glucose" class="form-label text-white fw-semibold">
+                                    <i class="bi bi-droplet-half text-primary me-2"></i>
+                                    Glucose
+                                </label>
+
+                                <input
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    class="form-control"
+                                    id="glucose"
+                                    name="glucose"
+                                    placeholder="e.g. 120"
+                                    value="{{ glucose if glucose is not none else '' }}"
+                                    required
+                                >
+
+                                <div class="form-text text-light opacity-75">
+                                    Plasma glucose concentration after two hours
+                                    (mg/dL).
+                                </div>
+                            </div>
+
+                            <!--   PRESIÓN ARTERIAL -->
+                            <div class="mb-4">
+                                <label for="blood_pressure" class="form-label text-white fw-semibold">
+                                    <i class="bi bi-heart-pulse text-primary me-2"></i>
+                                    Blood Pressure
+                                </label>
+
+                                <input
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    class="form-control"
+                                    id="blood_pressure"
+                                    name="blood_pressure"
+                                    placeholder="e.g. 72"
+                                    value="{{ blood_pressure if blood_pressure is not none else '' }}"
+                                    required
+                                >
+
+                                <div class="form-text text-light opacity-75">
+                                    Diastolic blood pressure (mm Hg).
+                                </div>
+                            </div>
+
+                            <!--   IMC -->
+                            <div class="mb-4">
+                                <label for="bmi" class="form-label text-white fw-semibold">
+                                    <i class="bi bi-person-standing text-primary me-2"></i>
+                                    Body Mass Index (BMI)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    class="form-control"
+                                    id="bmi"
+                                    name="bmi"
+                                    placeholder="e.g. 25.5"
+                                    value="{{ bmi if bmi is not none else '' }}"
+                                    required
+                                >
+
+                                <div class="form-text text-light opacity-75">
+                                    Body Mass Index measured in kg/m².
+                                </div>
+                            </div>
+
+                            <!--   EDAD -->
+                            <div class="mb-4">
+                                <label for="age" class="form-label text-white fw-semibold">
+                                    <i class="bi bi-calendar3 text-primary me-2"></i>
+                                    Age
+                                </label>
+
+                                <input
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    class="form-control"
+                                    id="age"
+                                    name="age"
+                                    placeholder="e.g. 35"
+                                    value="{{ age if age is not none else '' }}"
+                                    required
+                                >
+
+                                <div class="form-text text-light opacity-75">
+                                    Patient's age in years.
+                                </div>
+                            </div>
+
+                            <!--   ERROR -->
+                            {% if error %}
+                            <div class="alert alert-danger border-0 rounded-3 mb-4" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    <span>{{ error }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!--   BOTÓN -->
+                            <div class="d-grid mt-2">
+                                <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+                                    <i class="bi bi-cpu me-2"></i>
+                                    Run SVM Prediction
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!--   RESULTADO -->
+                <div class="col-12 col-lg-6">
+                    <div class="concept-card p-4 p-md-5 rounded-4 shadow-lg border border-secondary border-opacity-25 h-100"
+                         style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);">
+
+                        <!--   Encabezado -->
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                                 style="width: 50px; height: 50px;">
+                                <i class="bi bi-bar-chart-line fs-4"></i>
+                            </div>
+
+                            <div>
+                                <h2 class="h3 text-white mb-1 fw-bold">
+                                    Classification Result
+                                </h2>
+
+                                <span class="text-primary small fw-semibold">
+                                    MODEL OUTPUT
+                                </span>
+                            </div>
+                        </div>
+
+                        {% if prediction is not none %}
+
+                            <!--   CLASE 1 -->
+                            {% if prediction == 1 %}
+                            <div class="p-4 rounded-3 border border-danger border-opacity-50 bg-danger bg-opacity-10 text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-exclamation-circle-fill text-danger"
+                                       style="font-size: 3rem;"></i>
+                                </div>
+
+                                <span class="badge bg-danger px-3 py-2 mb-3">
+                                    CLASS 1
+                                </span>
+
+                                <h2 class="text-white fw-bold mb-2">
+                                    Diabetes
+                                </h2>
+
+                                <p class="text-light mb-0">
+                                    The SVM model classified the patient observation
+                                    as belonging to
+                                    <strong class="text-white">Class 1</strong>,
+                                    associated with the presence of diabetes in the
+                                    dataset.
+                                </p>
+                            </div>
+
+                            <!--   CLASE 0 -->
+                            {% else %}
+                            <div class="p-4 rounded-3 border border-success border-opacity-50 bg-success bg-opacity-10 text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-check-circle-fill text-success"
+                                       style="font-size: 3rem;"></i>
+                                </div>
+
+                                <span class="badge bg-success px-3 py-2 mb-3">
+                                    CLASS 0
+                                </span>
+
+                                <h2 class="text-white fw-bold mb-2">
+                                    No Diabetes
+                                </h2>
+
+                                <p class="text-light mb-0">
+                                    The SVM model classified the patient observation
+                                    as belonging to
+                                    <strong class="text-white">Class 0</strong>,
+                                    associated with the absence of diabetes in the
+                                    dataset.
+                                </p>
+                            </div>
+                            {% endif %}
+
+                            <!--   DATOS UTILIZADOS -->
+                            <div class="mt-4">
+                                <h5 class="text-white fw-bold mb-3">
+                                    <i class="bi bi-database me-2 text-primary"></i>
+                                    Input Data
+                                </h5>
+
+                                <div class="p-3 rounded-3 bg-white bg-opacity-10">
+                                    <div class="row g-2">
+
+                                        <div class="col-6">
+                                            <div class="small text-light opacity-75">
+                                                Glucose
+                                            </div>
+                                            <div class="text-white fw-semibold">
+                                                {{ glucose }} mg/dL
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="small text-light opacity-75">
+                                                Blood Pressure
+                                            </div>
+                                            <div class="text-white fw-semibold">
+                                                {{ blood_pressure }} mm Hg
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="small text-light opacity-75">
+                                                BMI
+                                            </div>
+                                            <div class="text-white fw-semibold">
+                                                {{ bmi }} kg/m²
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="small text-light opacity-75">
+                                                Age
+                                            </div>
+                                            <div class="text-white fw-semibold">
+                                                {{ age }} years
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
                         {% else %}
 
-                        <div class="alert alert-success text-center py-4">
+                            <!--   ESTADO INICIAL -->
+                            <div class="p-5 rounded-3 bg-white bg-opacity-10 text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-clipboard2-data text-primary"
+                                       style="font-size: 3.5rem;"></i>
+                                </div>
 
-                            <h2 class="fw-bold">
-                                Resultado: Sin indicios de diabetes
-                            </h2>
+                                <h5 class="text-white fw-bold">
+                                    Waiting for data
+                                </h5>
 
-                            <p class="mb-0">
-                                El modelo SVM ha clasificado al paciente
-                                como <strong>0 (Sano)</strong>.
-                            </p>
+                                <p class="text-light opacity-75 mb-0">
+                                    Complete the form to obtain a classification
+                                    from the trained SVM model.
+                                </p>
+                            </div>
 
-                        </div>
+                            <!--   Class information -->
+                            <div class="mt-4">
+                                <h5 class="text-white fw-bold mb-3">
+                                    <i class="bi bi-info-circle me-2 text-primary"></i>
+                                    Possible Classes
+                                </h5>
+
+                                <div class="row g-3">
+
+                                    <div class="col-12 col-sm-6">
+                                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                                            <span class="badge bg-success mb-2">
+                                                Class 0
+                                            </span>
+
+                                            <p class="text-white fw-semibold mb-1">
+                                                No Diabetes
+                                            </p>
+
+                                            <p class="text-light opacity-75 small mb-0">
+                                                Class associated with observations
+                                                without diabetes.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6">
+                                        <div class="p-3 rounded-3 bg-white bg-opacity-10 h-100">
+                                            <span class="badge bg-danger mb-2">
+                                                Class 1
+                                            </span>
+
+                                            <p class="text-white fw-semibold mb-1">
+                                                Diabetes
+                                            </p>
+
+                                            <p class="text-light opacity-75 small mb-0">
+                                                Class associated with observations
+                                                with diabetes.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
 
                         {% endif %}
 
-
-                        <!-- Datos utilizados -->
-
-                        <div class="mt-4">
-
-                            <h5 class="fw-bold mb-3">
-                                Datos utilizados
-                            </h5>
-
-                            <div class="table-responsive">
-
-                                <table class="table table-bordered align-middle">
-
-                                    <tbody>
-
-                                        <tr>
-                                            <th>Glucosa</th>
-                                            <td>{{ glucose }} mg/dL</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Presión arterial</th>
-                                            <td>{{ blood_pressure }} mm Hg</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>IMC</th>
-                                            <td>{{ bmi }} kg/m²</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Edad</th>
-                                            <td>{{ age }} años</td>
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-
-                        </div>
-
-
-                    {% else %}
-
-                        <div class="text-center text-muted py-5">
-
-                            <div class="mb-3">
-
-                                <span style="font-size: 3rem;">
-                                    🩺
-                                </span>
-
-                            </div>
-
-                            <h5 class="fw-bold">
-                                Esperando datos
-                            </h5>
-
-                            <p>
-                                Complete el formulario para obtener
-                                una predicción del modelo SVM.
-                            </p>
-
-                        </div>
-
-                    {% endif %}
-
+                    </div>
                 </div>
 
             </div>
-
-        </div>
-
-    </div>
-
-
-
-
-    <!-- ================================================== -->
-    <!-- VISUALIZACIÓN DEL CONJUNTO DE DATOS -->
-    <!-- ================================================== -->
-
-    <div class="card shadow-sm border-0 mt-4">
-
-        <div class="card-body p-4">
-
-            <h3 class="fw-bold mb-2">
-                Visualización del conjunto de datos
-            </h3>
-
-            <p class="text-muted">
-                Representación de las observaciones utilizando
-                Glucosa e IMC. Los puntos se diferencian según
-                la clase de resultado.
-            </p>
-
-            <div class="text-center mt-4">
-
-                <img
-                    src="data:image/png;base64,{{ data_plot_url }}"
-                    class="img-fluid rounded"
-                    alt="Gráfica de distribución de pacientes"
-                >
-
-            </div>
-
-        </div>
+        </section>
 
     </div>
-
-
 </div>
+
+<!-- Scroll navigation and active section detection -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".concept-section");
+    const navLinks = document.querySelectorAll(".path-nav a");
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.25
+    };
+
+    // Detects the section currently visible on the screen
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+
+                    const id = entry.target.getAttribute("id");
+
+                    navLinks.forEach((link) => {
+                        if (link.getAttribute("data-target") === id) {
+                            link.classList.add("active");
+                        } else {
+                            link.classList.remove("active");
+                        }
+                    });
+                }
+            });
+        },
+        observerOptions
+    );
+
+    // Activates the visibility observer for each section
+    sections.forEach((section) => {
+        observer.observe(section);
+    });
+
+    // Provides smooth scrolling between navigation sections
+    navLinks.forEach((link) => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const targetId = this.getAttribute("data-target");
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+});
+</script>
 
 {% endblock %}
