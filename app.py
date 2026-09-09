@@ -247,6 +247,57 @@ def svm_application():
 
 
 
+@app.route("/SVM/EvaluationMetrics")
+def svm_evalMetrics():
+
+    prediction = None
+    error = None
+
+    glucose = None  
+    blood_pressure = None
+    bmi = None
+    age = None
+
+
+    return render_template("svm/evalMetrics.html",
+
+        # Resultado de predicción
+        prediction=prediction,
+
+        # Valores introducidos
+        glucose=glucose,
+        blood_pressure=blood_pressure,
+        bmi=bmi,
+        age=age,
+
+        # Error
+        error=error,
+
+        # Información del modelo
+        num_records=num_records,
+        num_train=num_train,
+        num_test=num_test,
+
+        # Métricas
+        accuracy=accuracy,
+        precision=precision,
+        recall=recall,
+        f1=f1,
+
+        # Matriz
+        conf_matrix=conf_matrix,
+
+        # Gráficas
+        data_plot_url=data_plot_url,
+        confusion_plot_url=confusion_plot_url,
+
+        # Interpretación
+        interpretation=interpretation
+    )
+
+
+
+
 @app.route('/LinearRegression/', methods=['GET', 'POST'])
 def LRegressionGrades():
     CalculateGradeResult = None

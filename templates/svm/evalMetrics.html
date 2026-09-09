@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% block title %}
+Linear Regression Application
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/concepts.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Main page container -->
+
+
+<!-- ================================================== -->
+    <!-- MÉTRICAS -->
+    <!-- ================================================== -->
+
+    <div class="card shadow-sm border-0 mt-4">
+
+        <div class="card-body p-4">
+
+            <h3 class="fw-bold mb-4">
+                Métricas de evaluación
+            </h3>
+
+            <div class="row g-4 text-center">
+
+
+                <!-- Accuracy -->
+
+                <div class="col-md-3">
+
+                    <div class="border rounded p-3 h-100">
+
+                        <h6 class="text-muted">
+                            Accuracy
+                        </h6>
+
+                        <h2 class="fw-bold">
+                            {{ "%.2f"|format(accuracy * 100) }}%
+                        </h2>
+
+                        <p class="small text-muted mb-0">
+                            Exactitud general del modelo.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Precision -->
+
+                <div class="col-md-3">
+
+                    <div class="border rounded p-3 h-100">
+
+                        <h6 class="text-muted">
+                            Precision
+                        </h6>
+
+                        <h2 class="fw-bold">
+                            {{ "%.2f"|format(precision * 100) }}%
+                        </h2>
+
+                        <p class="small text-muted mb-0">
+                            Proporción de predicciones positivas
+                            que fueron correctas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Recall -->
+
+                <div class="col-md-3">
+
+                    <div class="border rounded p-3 h-100">
+
+                        <h6 class="text-muted">
+                            Recall
+                        </h6>
+
+                        <h2 class="fw-bold">
+                            {{ "%.2f"|format(recall * 100) }}%
+                        </h2>
+
+                        <p class="small text-muted mb-0">
+                            Capacidad para detectar los casos
+                            positivos.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- F1 -->
+
+                <div class="col-md-3">
+
+                    <div class="border rounded p-3 h-100">
+
+                        <h6 class="text-muted">
+                            F1-score
+                        </h6>
+
+                        <h2 class="fw-bold">
+                            {{ "%.2f"|format(f1 * 100) }}%
+                        </h2>
+
+                        <p class="small text-muted mb-0">
+                            Equilibrio entre precision y recall.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- MATRIZ DE CONFUSIÓN -->
+    <!-- ================================================== -->
+
+    <div class="card shadow-sm border-0 mt-4">
+
+        <div class="card-body p-4">
+
+            <h3 class="fw-bold mb-3">
+                Matriz de Confusión
+            </h3>
+
+            <p class="text-muted">
+                Permite comparar las clases reales del conjunto
+                de prueba con las clases predichas por el modelo.
+            </p>
+
+
+            <div class="row align-items-center mt-4">
+
+                <!-- Imagen -->
+
+                <div class="col-lg-6 text-center">
+
+                    <img
+                        src="data:image/png;base64,{{ confusion_plot_url }}"
+                        class="img-fluid rounded"
+                        alt="Matriz de confusión"
+                    >
+
+                </div>
+
+
+                <!-- Tabla -->
+
+                <div class="col-lg-6">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered text-center">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th></th>
+
+                                    <th>
+                                        Predicho: 0
+                                    </th>
+
+                                    <th>
+                                        Predicho: 1
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th>
+                                        Real: 0
+                                    </th>
+
+                                    <td>
+                                        {{ conf_matrix[0][0] }}
+                                    </td>
+
+                                    <td>
+                                        {{ conf_matrix[0][1] }}
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>
+                                        Real: 1
+                                    </th>
+
+                                    <td>
+                                        {{ conf_matrix[1][0] }}
+                                    </td>
+
+                                    <td>
+                                        {{ conf_matrix[1][1] }}
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- INTERPRETACIÓN -->
+    <!-- ================================================== -->
+
+    <div class="card shadow-sm border-0 mt-4 mb-5">
+
+        <div class="card-body p-4">
+
+            <h3 class="fw-bold mb-3">
+                Interpretación de los resultados
+            </h3>
+
+            <p class="text-muted">
+                {{ interpretation }}
+            </p>
+
+            <p class="text-muted mb-0">
+                En la matriz de confusión se observan
+                <strong>{{ conf_matrix[0][0] }}</strong> casos
+                correctamente clasificados como sanos,
+                <strong>{{ conf_matrix[1][1] }}</strong> casos
+                correctamente clasificados como diabéticos,
+                <strong>{{ conf_matrix[0][1] }}</strong> casos sanos
+                clasificados incorrectamente como diabéticos y
+                <strong>{{ conf_matrix[1][0] }}</strong> casos diabéticos
+                clasificados incorrectamente como sanos.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- NOTA -->
+    <!-- ================================================== -->
+
+    <div class="alert alert-secondary mb-5">
+
+        <strong>Nota:</strong>
+        Esta aplicación corresponde a una implementación académica
+        de un modelo de clasificación SVM. Los resultados obtenidos
+        no constituyen un diagnóstico médico.
+        
+    </div>
+
+</div>
+{% endblock %} 
