@@ -128,6 +128,11 @@ def case3():
 def case4():
     return render_template('machine_learning/use_cases/case4.html')
 
+# SVM CONCEPTS
+@app.route("/SVM/concepts")
+def svm_concepts():
+    return render_template("svm/conceptsSVM.html")
+
 # SVM APPLICATION
 @app.route("/SVM/application", methods=["GET", "POST"])
 def svm_application():
