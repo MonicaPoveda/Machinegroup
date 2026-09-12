@@ -103,6 +103,40 @@ def linear_regression_application():
         intercept=intercept
     )
 
+# LINEAR REGRESSION MENU
+@app.route("/linear_regression")
+def linear_regression_menu():
+    return render_template("linear_regression/linear_regression.html")
+
+# LOGISTIC REGRESSION MENU AND PLACEHOLDER PAGES
+@app.route("/logistic_regression")
+def logistic_regression_menu():
+    return render_template("logistic_regression/logistic_regression.html")
+
+@app.route("/logistic_regression/concepts")
+def logistic_regression_concepts():
+    return render_template(
+        "logistic_regression/placeholder.html",
+        page_title="Logistic Regression Concepts",
+        page_type="Concepts"
+    )
+
+@app.route("/logistic_regression/application")
+def logistic_regression_application():
+    return render_template(
+        "logistic_regression/placeholder.html",
+        page_title="Logistic Regression Application",
+        page_type="Application"
+    )
+
+@app.route("/logistic_regression/evaluation-metrics")
+def logistic_regression_metrics():
+    return render_template(
+        "logistic_regression/placeholder.html",
+        page_title="Logistic Regression Evaluation Metrics",
+        page_type="Evaluation Metrics"
+    )
+
 # USE CASES
 @app.route("/use_cases")
 def use_cases():
@@ -132,6 +166,11 @@ def case4():
 @app.route("/SVM/concepts")
 def svm_concepts():
     return render_template("svm/conceptsSVM.html")
+
+# SVM MENU
+@app.route("/SVM")
+def svm_menu():
+    return render_template("svm/svm.html")
 
 # SVM APPLICATION
 @app.route("/SVM/application", methods=["GET", "POST"])

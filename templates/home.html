@@ -27,7 +27,7 @@ Machine Learning
                     Machine Learning is a branch of artificial intelligence that allows computers to learn from data, identify patterns, and make predictions without being explicitly programmed for every task.
                 </p>
                 <p class="hero-secondary mb-0">
-                    Explore its fundamental concepts, discover the different types of machine learning, and learn how supervised learning can be applied through Linear Regression.
+                    Explore its fundamental concepts, discover the different types of machine learning, and learn how supervised learning algorithms can be applied to real problems.
                 </p>
             </div>
         </div>
@@ -88,28 +88,38 @@ Machine Learning
                     </div>
                 </div>
 
-                <!-- Card 4: Linear Regression Concepts -->
+                <!-- Card 4: Linear Regression -->
                 <div class="col-12 col-md-6 col-lg-4 d-flex">
                     <div class="card explore-card text-center">
                         <div class="card-body p-4 p-lg-5">
                             <div class="card-icon mb-4"><i class="bi bi-graph-up"></i></div>
-                            <h3 class="card-title mb-3">Linear Regression Concepts</h3>
-                            <p class="card-text mb-4">Understand linear regression, its variables, formulas, and how the model works.</p>
-                            <a href="{{ url_for('linear_regression_concepts') }}" class="explore-link">Explore →</a>
+                            <h3 class="card-title mb-3">Linear Regression</h3>
+                            <p class="card-text mb-4">Review its concepts and use a trained model to generate predictions from real data.</p>
+                            <a href="{{ url_for('linear_regression_menu') }}" class="explore-link">Explore →</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 5: Linear Regression Application -->
+                <!-- Card 5: Logistic Regression -->
                 <div class="col-12 col-md-6 col-lg-4 d-flex">
                     <div class="card explore-card text-center">
                         <div class="card-body p-4 p-lg-5">
-                            <div class="card-icon mb-4"><i class="bi bi-bullseye"></i></div>
-                            <h3 class="card-title mb-3">Linear Regression Application</h3>
-                            <p class="card-text mb-4">Apply linear regression to a real dataset and make predictions using the trained model.</p>
+                            <div class="card-icon mb-4"><i class="bi bi-bar-chart-steps"></i></div>
+                            <h3 class="card-title mb-3">Logistic Regression</h3>
+                            <p class="card-text mb-4">Learn how classification models estimate the probability of belonging to a category.</p>
+                            <a href="{{ url_for('logistic_regression_menu') }}" class="explore-link">Explore →</a>
+                        </div>
+                    </div>
+                </div>
 
-                            <a href="{{ url_for('linear_regression_application') }}" class="explore-link">Explore →</a>
-
+                <!-- Card 6: Support Vector Machine -->
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="card explore-card text-center">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="card-icon mb-4"><i class="bi bi-diagram-3"></i></div>
+                            <h3 class="card-title mb-3">Support Vector Machine</h3>
+                            <p class="card-text mb-4">Explore SVM concepts, classify observations, and review the model evaluation metrics.</p>
+                            <a href="{{ url_for('svm_menu') }}" class="explore-link">Explore →</a>
                         </div>
                     </div>
                 </div>

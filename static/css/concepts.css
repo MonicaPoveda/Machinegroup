@@ -141,9 +141,6 @@
 /* Section anchor offset + scroll-reveal animation */
 .concept-section {
     scroll-margin-top: 150px;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .concept-section.is-visible {
