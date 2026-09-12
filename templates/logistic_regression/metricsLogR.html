@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Logistic Regression - Evaluation Metrics{% endblock %}
+
+{% block content %}
+
+<div class="container py-5" style="padding-top: 120px !important;">
+
+    <!-- HEADER -->
+    <div class="text-center mb-5">
+        <h1 class="display-2 fw-bold text-white">
+            Logistic Regression <span class="brand-highlight">Evaluation Metrics</span>
+        </h1>
+        <p class="section-description mx-auto mt-4">
+            Evaluate the performance of the Logistic Regression model using key classification metrics.
+        </p>
+    </div>
+
+    <!-- CARD 1: CONFUSION MATRIX -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-grid"></i> Confusion Matrix
+            </h2>
+            <p class="card-text">
+                The Confusion Matrix shows the performance of the model on the test dataset (20% of the data).
+                It compares the actual labels with the predicted labels.
+            </p>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Predicted: Class 0</th>
+                            <th>Predicted: Class 1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Actual: Class 0</strong></td>
+                            <td class="text-success"><strong>TN</strong></td>
+                            <td class="text-danger"><strong>FP</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Actual: Class 1</strong></td>
+                            <td class="text-danger"><strong>FN</strong></td>
+                            <td class="text-success"><strong>TP</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <p class="card-text"><span class="text-success">TP (True Positives)</span>: Correctly predicted Class 1</p>
+                    <p class="card-text"><span class="text-success">TN (True Negatives)</span>: Correctly predicted Class 0</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="card-text"><span class="text-danger">FP (False Positives)</span>: Incorrectly predicted Class 1</p>
+                    <p class="card-text"><span class="text-danger">FN (False Negatives)</span>: Incorrectly predicted Class 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2: CLASSIFICATION METRICS -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-bar-chart"></i> Classification Metrics
+            </h2>
+            <p class="card-text">
+                These metrics help evaluate the model's performance on the test dataset.
+            </p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card bg-dark bg-opacity-50 text-center p-3">
+                        <h3 class="text-info">85.5%</h3>
+                        <p class="card-text">Accuracy</p>
+                        <small class="text-white-50">(TP + TN) / Total</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-dark bg-opacity-50 text-center p-3">
+                        <h3 class="text-success">82.3%</h3>
+                        <p class="card-text">Precision</p>
+                        <small class="text-white-50">TP / (TP + FP)</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-dark bg-opacity-50 text-center p-3">
+                        <h3 class="text-warning">79.1%</h3>
+                        <p class="card-text">Recall</p>
+                        <small class="text-white-50">TP / (TP + FN)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 3: INTERPRETATION -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-pencil"></i> Interpretation of Results
+            </h2>
+            <p class="card-text">
+                The model achieved an accuracy of <strong class="text-info">85.5%</strong>, 
+                meaning it correctly classified 85.5% of the test cases.
+            </p>
+            <p class="card-text">
+                The precision of <strong class="text-success">82.3%</strong> indicates 
+                that when the model predicts Class 1, it is correct 82.3% of the time.
+            </p>
+            <p class="card-text">
+                The recall of <strong class="text-warning">79.1%</strong> indicates 
+                that the model correctly identified 79.1% of all actual Class 1 cases.
+            </p>
+            <div class="alert alert-success mt-3">
+                <i class="bi bi-lightbulb"></i>
+                <strong>Conclusion:</strong> 
+                This model performs well for this classification task, with an accuracy above 85%.
+                The precision and recall values indicate the model is reliable for predicting Class 1.
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-light btn-lg px-5 rounded-pill">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

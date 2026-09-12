@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Logistic Regression Concepts{% endblock %}
+
+{% block content %}
+
+<div class="container py-5" style="padding-top: 120px !important;">
+
+    <!-- HEADER -->
+    <div class="text-center mb-5">
+        <h1 class="display-2 fw-bold text-white">
+            Logistic Regression <span class="brand-highlight">Concepts</span>
+        </h1>
+        <p class="section-description mx-auto mt-4">
+            Logistic Regression is a supervised learning algorithm used for binary classification.
+            It predicts the probability that an observation belongs to a specific class.
+        </p>
+    </div>
+
+    <!-- CARD 1: WHAT IS LOGISTIC REGRESSION -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-question-circle"></i> What is Logistic Regression?
+            </h2>
+            <p class="card-text">
+                Logistic Regression is a <strong class="text-white">supervised learning</strong> algorithm used for 
+                <strong class="text-white">binary classification</strong> problems. It predicts the probability 
+                that an observation belongs to a specific class.
+            </p>
+            <p class="card-text">
+                Unlike Linear Regression, which predicts continuous values, Logistic Regression outputs a 
+                <strong class="text-white">probability between 0 and 1</strong> using the 
+                <strong class="text-white">Sigmoid Function</strong>.
+            </p>
+            <div class="mt-3">
+                <span class="badge bg-info me-2">Classification Algorithm</span>
+                <span class="badge bg-success me-2">Supervised Learning</span>
+                <span class="badge bg-warning text-dark">Binary Output</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2: VARIABLES AND CLASSES -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-sliders"></i> Variables and Classes
+            </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-white">Independent Variable (X)</h5>
+                    <p class="card-text">The input variable used to make the prediction.</p>
+                    <ul class="card-text">
+                        <li><strong>Example:</strong> Hours of study, glucose level, transaction amount</li>
+                        <li><strong>Type:</strong> Continuous or categorical</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-white">Dependent Variable (Y)</h5>
+                    <p class="card-text">The binary target variable to predict.</p>
+                    <ul class="card-text">
+                        <li><strong>Class 0:</strong> Negative outcome (e.g., No, Low Risk)</li>
+                        <li><strong>Class 1:</strong> Positive outcome (e.g., Yes, High Risk)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 3: SIGMOID FUNCTION -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-graph-up"></i> Sigmoid Function
+            </h2>
+            <p class="card-text">
+                The <strong class="text-white">Sigmoid Function</strong> (also called the logistic function)
+                transforms any real value into a probability between 0 and 1.
+            </p>
+            <div class="text-center my-3 p-3 bg-dark bg-opacity-50 rounded-3">
+                <code class="text-info fs-5">
+                    P(x) = 1 / (1 + e<sup>-(β₀ + β₁x)</sup>)
+                </code>
+            </div>
+            <p class="card-text">
+                This transformation allows the model to output probabilities that can be interpreted
+                as the likelihood of belonging to a specific class.
+            </p>
+            <div class="row g-3 mt-2">
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <span class="text-light d-block">Output is always between <strong class="text-white">0 and 1</strong></span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <span class="text-light d-block">S-shaped (Sigmoid) curve</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        <span class="text-light d-block">Maps any value to a <strong class="text-white">probability</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 4: CLASSIFICATION THRESHOLD -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-sliders2"></i> Classification Threshold
+            </h2>
+            <p class="card-text">
+                The <strong class="text-white">Classification Threshold</strong> (typically 0.5) determines the final class
+                based on the predicted probability.
+            </p>
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="p-4 rounded-3 bg-success bg-opacity-25 border border-success h-100">
+                        <div class="text-center">
+                            <div class="display-6 fw-bold text-white">≥ 0.5</div>
+                            <span class="badge bg-success">Predicts Class 1</span>
+                            <p class="text-light small mt-2 mb-0">Probability is high enough to predict the positive class</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="p-4 rounded-3 bg-info bg-opacity-25 border border-info h-100">
+                        <div class="text-center">
+                            <div class="display-6 fw-bold text-white">< 0.5</div>
+                            <span class="badge bg-info">Predicts Class 0</span>
+                            <p class="text-light small mt-2 mb-0">Probability is low, predicting the negative class</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 5: DIFFERENCES -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-arrow-left-right"></i> Linear vs Logistic Regression
+            </h2>
+            <p class="card-text">
+                The key difference is that <strong class="text-white">Linear Regression</strong> is used for continuous outcomes,
+                while <strong class="text-white">Logistic Regression</strong> is used for categorical outcomes.
+            </p>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Linear Regression</th>
+                            <th>Logistic Regression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Predicts continuous values</td>
+                            <td>Predicts categorical classes</td>
+                        </tr>
+                        <tr>
+                            <td>Uses linear function</td>
+                            <td>Uses sigmoid function</td>
+                        </tr>
+                        <tr>
+                            <td>Output: any number</td>
+                            <td>Output: probability (0 to 1)</td>
+                        </tr>
+                        <tr>
+                            <td>Evaluation: MSE, R²</td>
+                            <td>Evaluation: Accuracy, Precision, Recall</td>
+                        </tr>
+                        <tr>
+                            <td>Example: Predict house price</td>
+                            <td>Example: Predict if email is spam</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 6: APPLICATIONS -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="section-title h3 mb-4">
+                <i class="bi bi-briefcase"></i> Common Applications
+            </h2>
+            <p class="card-text">
+                Logistic Regression has several real-world applications across many different industries:
+            </p>
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center h-100">
+                        <i class="bi bi-heart-pulse text-primary fs-2"></i>
+                        <h4 class="text-white mt-2">Healthcare</h4>
+                        <p class="text-light small mb-0">Disease prediction and risk assessment</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center h-100">
+                        <i class="bi bi-credit-card text-primary fs-2"></i>
+                        <h4 class="text-white mt-2">Finance</h4>
+                        <p class="text-light small mb-0">Fraud detection and credit scoring</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="p-3 rounded-3 bg-white bg-opacity-10 text-center h-100">
+                        <i class="bi bi-envelope text-primary fs-2"></i>
+                        <h4 class="text-white mt-2">Technology</h4>
+                        <p class="text-light small mb-0">Spam detection and email filtering</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-light btn-lg px-5 rounded-pill">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

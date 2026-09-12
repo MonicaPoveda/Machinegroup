@@ -12,6 +12,7 @@ from SVM import (
       num_train, num_test, interpretation
 )
 import LinearRegressionGraddes
+import LineaR
 
 from LinearRegressionApplication import (
     data, data_preview, model as model_lr, num_records as lr_num_records,
@@ -113,13 +114,7 @@ def linear_regression_menu():
 def logistic_regression_menu():
     return render_template("logistic_regression/logistic_regression.html")
 
-@app.route("/logistic_regression/concepts")
-def logistic_regression_concepts():
-    return render_template(
-        "logistic_regression/placeholder.html",
-        page_title="Logistic Regression Concepts",
-        page_type="Concepts"
-    )
+
 
 @app.route("/logistic_regression/application")
 def logistic_regression_application():
@@ -304,6 +299,14 @@ def clasifi():
         clase_css=clase_css,
         grafica=grafica_base64
     )
+
+@app.route("/logistic_concepts")
+def logistic_concepts():
+    return render_template("logistic_regression/conceptsLogR.html")
+
+@app.route("/logistic")
+def logistic_index():
+    return render_template("logistic_regression/logistic_regression.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

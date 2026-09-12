@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}Logistic Regression Application{% endblock %}
+
+{% block content %}
+
+<div class="container py-5" style="padding-top: 120px !important;">
+
+    <!-- HEADER -->
+    <div class="text-center mb-5">
+        <h1 class="display-2 fw-bold text-white">
+            Logistic Regression <span class="brand-highlight">Application</span>
+        </h1>
+        <p class="section-description mx-auto mt-4">
+            This page contains two Logistic Regression implementations: the professor's example 
+            and a real-world application developed by the group.
+        </p>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PART 1: PROFESSOR'S EXAMPLE               -->
+    <!-- ========================================== -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-circle me-3 bg-primary text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                     style="width: 50px; height: 50px;">
+                    <i class="bi bi-mortarboard fs-4"></i>
+                </div>
+                <div>
+                    <h2 class="h3 text-white mb-0 fw-bold">
+                        Part 1: Professor's Example
+                    </h2>
+                </div>
+            </div>
+
+            <h3 class="section-title h4 mb-3">Problem Context</h3>
+            <p class="card-text">
+                This example analyzes the relationship between 
+                <strong class="text-white">Study Hours</strong> and 
+                <strong class="text-white">Final Grade</strong> using Logistic Regression.
+            </p>
+            <p class="card-text">
+                The goal is to classify whether a student passes based on their study hours.
+            </p>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>X:</strong> Study Hours
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>Y:</strong> Grade (0=Fail, 1=Pass)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>Records:</strong> 19 students
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title h4 mb-3">Dataset</h3>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Study Hours</th>
+                            <th>Final Grade</th>
+                            <th>Pass (0/1)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>10</td><td>3.8</td><td>0</td></tr>
+                        <tr><td>15</td><td>4.2</td><td>1</td></tr>
+                        <tr><td>12</td><td>3.6</td><td>0</td></tr>
+                        <tr><td>8</td><td>3.4</td><td>0</td></tr>
+                        <tr><td>14</td><td>2.5</td><td>0</td></tr>
+                        <tr><td>5</td><td>4.8</td><td>1</td></tr>
+                        <tr><td>16</td><td>2.8</td><td>0</td></tr>
+                        <tr><td>7</td><td>3.7</td><td>0</td></tr>
+                        <tr><td>11</td><td>4.0</td><td>0</td></tr>
+                        <tr><td>13</td><td>3.2</td><td>0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-title h4 mb-3">Code Implementation</h3>
+            <div class="bg-dark p-3 rounded-3">
+                <pre class="text-light small mb-0" style="font-family: monospace;">
+# Import libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Data
+data = pd.DataFrame({
+    'Study Hours': [10, 15, 12, 8, 14, 5, 16, 7, 11, 13],
+    'Pass': [0, 1, 0, 0, 0, 1, 0, 0, 0, 0]
+})
+
+X = data[['Study Hours']]
+y = data['Pass']
+
+# Train model
+model = LogisticRegression()
+model.fit(X, y)
+                </pre>
+            </div>
+
+            <div class="alert alert-success mt-3">
+                <i class="bi bi-check-circle"></i>
+                <strong>Result:</strong> The model predicts whether a student passes based on their study hours.
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PART 2: OWN APPLICATION                    -->
+    <!-- ========================================== -->
+    <div class="explore-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-circle me-3 bg-success text-white rounded-circle p-3 d-flex align-items-center justify-content-center"
+                     style="width: 50px; height: 50px;">
+                    <i class="bi bi-cpu fs-4"></i>
+                </div>
+                <div>
+                    <h2 class="h3 text-white mb-0 fw-bold">
+                        Part 2: Own Application
+                    </h2>
+                </div>
+            </div>
+
+            <h3 class="section-title h4 mb-3">Problem Context</h3>
+            <p class="card-text">
+                This analysis examines the relationship between 
+                <strong class="text-white">[VARIABLE X]</strong> and 
+                <strong class="text-white">[TARGET Y]</strong>.
+            </p>
+            <p class="card-text">
+                The goal is to classify whether a person belongs to 
+                <strong class="text-white">Class 0</strong> or 
+                <strong class="text-white">Class 1</strong> based on the input value.
+            </p>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>X:</strong> [VARIABLE X]
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>Y:</strong> [CLASS 0] / [CLASS 1]
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-dark bg-opacity-25 p-3 rounded">
+                        <strong>Records:</strong> 500+
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title h4 mb-3">Prediction Form</h3>
+            <p class="card-text">
+                Enter a value for <strong class="text-white">[VARIABLE X]</strong> to predict the corresponding class.
+            </p>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label for="variable_x" class="form-label text-white fw-bold">
+                        <i class="bi bi-sliders"></i> [VARIABLE X]
+                    </label>
+                    <input type="number" 
+                           step="0.1" 
+                           min="0" 
+                           class="form-control form-control-lg bg-dark text-white border-secondary" 
+                           id="variable_x" 
+                           name="variable_x" 
+                           placeholder="Example: 50"
+                           required>
+                    <small class="text-white-50">Enter a value to predict the classification</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
+                    <i class="bi bi-rocket-takeoff"></i> Predict Class
+                </button>
+            </form>
+
+            <!-- RESULTADO -->
+            <div class="mt-4 p-4 rounded-3 result-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-md-start">
+                        <h5 class="text-light">
+                            <i class="bi bi-check-circle text-success"></i> Prediction Result
+                        </h5>
+                        <p class="text-white-50">
+                            For [VARIABLE X] = <strong>50</strong>:
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h2 class="display-4 fw-bold text-success">
+                            Class 1
+                        </h2>
+                        <span class="badge bg-success">Predicted Class</span>
+                        <div class="mt-1">
+                            <small class="text-white-50">Probability: 0.87</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-light btn-lg px-5 rounded-pill">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
