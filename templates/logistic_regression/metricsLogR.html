@@ -35,16 +35,34 @@
                             <th>Predicted: Class 1</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr>
                             <td><strong>Actual: Class 0</strong></td>
-                            <td class="text-success"><strong>TN</strong></td>
-                            <td class="text-danger"><strong>FP</strong></td>
+
+                            <td class="text-success">
+                                <strong>TN</strong><br>
+                                {{ matriz[0][0] }}
+                            </td>
+
+                            <td class="text-danger">
+                                <strong>FP</strong><br>
+                                {{ matriz[0][1] }}
+                            </td>
                         </tr>
+
                         <tr>
                             <td><strong>Actual: Class 1</strong></td>
-                            <td class="text-danger"><strong>FN</strong></td>
-                            <td class="text-success"><strong>TP</strong></td>
+
+                            <td class="text-danger">
+                                <strong>FN</strong><br>
+                                {{ matriz[1][0] }}
+                            </td>
+
+                            <td class="text-success">
+                                <strong>TP</strong><br>
+                                {{ matriz[1][1] }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,25 +90,32 @@
                 These metrics help evaluate the model's performance on the test dataset.
             </p>
             <div class="row g-4">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card bg-dark bg-opacity-50 text-center p-3">
-                        <h3 class="text-info">85.5%</h3>
+                        <h3 class="text-info text-nowrap">{{ (accuracy * 100) | round(2) }}%</h3>
                         <p class="card-text">Accuracy</p>
                         <small class="text-white-50">(TP + TN) / Total</small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card bg-dark bg-opacity-50 text-center p-3">
-                        <h3 class="text-success">82.3%</h3>
+                        <h3 class="text-success text-nowrap">{{ (precision * 100) | round(2) }}%</h3>
                         <p class="card-text">Precision</p>
                         <small class="text-white-50">TP / (TP + FP)</small>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card bg-dark bg-opacity-50 text-center p-3">
-                        <h3 class="text-warning">79.1%</h3>
+                        <h3 class="text-warning text-nowrap">{{ (recall * 100) | round(2) }}%</h3>
                         <p class="card-text">Recall</p>
                         <small class="text-white-50">TP / (TP + FN)</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-dark bg-opacity-50 text-center p-3">
+                        <h3 class="text-warning text-nowrap">{{ (f1 * 100) | round(2) }}%</h3>
+                        <p class="card-text">F1 Score</p>
+                        <small class="text-white-50">2 * (Precision * Recall) / (Precision + Recall)</small>
                     </div>
                 </div>
             </div>
@@ -104,22 +129,39 @@
                 <i class="bi bi-pencil"></i> Interpretation of Results
             </h2>
             <p class="card-text">
-                The model achieved an accuracy of <strong class="text-info">85.5%</strong>, 
-                meaning it correctly classified 85.5% of the test cases.
+                The model achieved an accuracy of 
+                <strong class="text-info">{{ (accuracy * 100)|round(2) }}%</strong>,
+                meaning it correctly classified 
+                <strong class="text-info">{{ (accuracy * 100)|round(2) }}%</strong>
+                of the test cases.
             </p>
             <p class="card-text">
-                The precision of <strong class="text-success">82.3%</strong> indicates 
-                that when the model predicts Class 1, it is correct 82.3% of the time.
+                The precision of 
+                <strong class="text-success">{{ (precision * 100)|round(2) }}%</strong>
+                indicates that when the model predicts Class 1, it is correct 
+                <strong class="text-success">{{ (precision * 100)|round(2) }}%</strong>
+                of the time.
             </p>
             <p class="card-text">
-                The recall of <strong class="text-warning">79.1%</strong> indicates 
-                that the model correctly identified 79.1% of all actual Class 1 cases.
+                The recall of 
+                <strong class="text-warning">{{ (recall * 100)|round(2) }}%</strong>
+                indicates that the model correctly identified 
+                <strong class="text-warning">{{ (recall * 100)|round(2) }}%</strong>
+                of all actual Class 1 cases.
+            </p>
+            <p class="card-text">
+                The F1-score of 
+                <strong class="text-primary">{{ (f1 * 100)|round(2) }}%</strong>
+                represents the balance between precision and recall.
+                A higher F1-score indicates a better balance between correctly
+                identifying Class 1 cases and avoiding false positives.
             </p>
             <div class="alert alert-success mt-3">
                 <i class="bi bi-lightbulb"></i>
-                <strong>Conclusion:</strong> 
-                This model performs well for this classification task, with an accuracy above 85%.
-                The precision and recall values indicate the model is reliable for predicting Class 1.
+                <strong>Conclusion:</strong>
+                The model provides a measurable performance for the binary classification
+                task. The accuracy, precision, recall, and F1-score together provide a
+                more complete view of how well the model identifies the two classes.
             </div>
         </div>
     </div>

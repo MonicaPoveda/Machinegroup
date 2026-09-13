@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
-from logistic_Regression import clasificar_mensaje
+from logistic_Regression import ( 
+    clasificar_mensaje,
+    accuracy, precision, recall, f1, matriz)
 
 #from SVM import msv_model, scaler
 from SVM import (
@@ -144,9 +146,12 @@ def logistic_regression_application():
 @app.route("/logistic_regression/evaluation-metrics")
 def logistic_regression_metrics():
     return render_template(
-        "logistic_regression/placeholder.html",
-        page_title="Logistic Regression Evaluation Metrics",
-        page_type="Evaluation Metrics"
+        "logistic_regression/metricsLogR.html",
+        accuracy=accuracy,
+        precision=precision,
+        recall=recall,
+        f1=f1,
+        matriz=matriz
     )
 
 # USE CASES
