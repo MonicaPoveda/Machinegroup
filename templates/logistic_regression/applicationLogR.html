@@ -137,24 +137,24 @@ model.fit(X, y)
             <h3 class="section-title h4 mb-3">Problem Context</h3>
             <p class="card-text">
                 This analysis examines the relationship between 
-                <strong class="text-white">[VARIABLE X]</strong> and 
-                <strong class="text-white">[TARGET Y]</strong>.
+                <strong class="text-white">Suspicious Words and Number of Links</strong> and 
+                <strong class="text-white">Spam Classification</strong>.
             </p>
             <p class="card-text">
                 The goal is to classify whether a person belongs to 
-                <strong class="text-white">Class 0</strong> or 
-                <strong class="text-white">Class 1</strong> based on the input value.
+                <strong class="text-white">No Spam</strong> or 
+                <strong class="text-white">Spam</strong> based on the input value.
             </p>
 
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="bg-dark bg-opacity-25 p-3 rounded">
-                        <strong>X:</strong> [VARIABLE X]
+                        <strong>X:</strong> Suspicious Words and Number of Links
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="bg-dark bg-opacity-25 p-3 rounded">
-                        <strong>Y:</strong> [CLASS 0] / [CLASS 1]
+                        <strong>Y:</strong> No Spam / Spam
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -166,14 +166,14 @@ model.fit(X, y)
 
             <h3 class="section-title h4 mb-3">Prediction Form</h3>
             <p class="card-text">
-                Enter a value for <strong class="text-white">[VARIABLE X]</strong> to predict the corresponding class.
+                Enter a value for <strong class="text-white">Suspicious Words and Number of Links</strong> to predict the corresponding class.
             </p>
 
             <form method="Post" action="{{url_for('logistic_regression_application')}}">
                 <div class="mb-3">
                     <label for="palabras_sospechosas" class="form-label text-white fw-bold">
                         <i class="bi bi-exclamation-triangle"></i>
-                        Palabras Sospechosas
+                        Suspicious Words
                     </label>
 
                     <input type="number" 
@@ -191,7 +191,7 @@ model.fit(X, y)
                     <div class="mb-3">
                         <label for="cantidad_links" class="form-label text-white fw-bold">
                             <i class="bi bi-link-45deg"></i>
-                            Cantidad de Links
+                            Number of Links
                         </label>
                         <input type="number" 
                                step="1" 
@@ -208,12 +208,12 @@ model.fit(X, y)
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
                     <i class="bi bi-rocket-takeoff"></i> 
-                    Clasificar Mensaje
+                    Classify Message
                 </button>
             </form>
 
             <!-- RESULTADO -->
-             {% if prediction is not none %}
+             {% if resultado is not none %}
             <div class="mt-4 p-4 rounded-3 result-card">
                 <div class="row align-items-center">
                     <div class="col-md-6 text-md-start">
@@ -222,18 +222,18 @@ model.fit(X, y)
                             Prediction Result
                         </h5>
                         <p class="text-white-50">
-                            Mensaje clasificado con:
+                            Message classified with:
 
                             <br>
-                            <strong>Palabras sospechosas</strong>
+                            <strong>Suspicious Words</strong>
                             {{ request.form.get("palabras_sospechosas") }}
                             <br>
-                            <strong>Cantidad de links</strong>
+                            <strong>Number of Links</strong>
                             {{ request.form.get("cantidad_links") }}
                         </p>
                     </div>
                     <div class="col-md-6 text-center">
-                        {% if prediction == 1 %}
+                        {% if resultado == 1 %}
                         <h2 class="display-4 fw-bold text-success">
                             Spam
                         </h2>
@@ -246,7 +246,7 @@ model.fit(X, y)
                         {% endif %}
                         <div class="mt-2">
                             <small class="text-white-50">
-                                Probabilidad Spam: {{ probabilidad}}%
+                                Spam Probability: {{ probabilidad}}%
                             </small>
                         </div>
                     </div>
