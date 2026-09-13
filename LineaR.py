@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 
 # ===== IMPORTAR DATASET DESDE CSV =====
 #print(" Importando dataset...")
-df = pd.read_csv('Data/dataset.csv')
+df = pd.read_csv('data/dataset.csv')
 #print(f"Dataset importado con {len(df)} registros")
 
 # Mostrar primeros 5 registros
@@ -47,7 +47,7 @@ def get_model_info():
         'intercepto': round(model.intercept_[0], 2),
         'r2': round(r2, 4),
         'total_records': len(df),
-        'csv_file': 'Data/dataset.csv'
+        'csv_file': 'data/dataset.csv'
     }
 
 # ===== PROBAR =====
