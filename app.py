@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from logistic_Regression import clasificar_mensaje
 
 #from SVM import msv_model, scaler
 from SVM import (
@@ -116,12 +117,28 @@ def logistic_regression_menu():
 
 
 
-@app.route("/logistic_regression/application")
+@app.route("/logistic_regression/application",methods=["GET", "POST"])
 def logistic_regression_application():
+
+    resultado = None
+    probabilidad = None
+
+    if request.method == "POST":
+        palabras_sospechosas = int(
+            request.form.get("palabras_sospechosas"))
+        
+        cantidad_links = int(
+            request.form.get("cantidad_links"))
+        
+        resultado, probabilidades = clasificar_mensaje(
+            palabras_sospechosas, cantidad_links)
+
+        probabilidad = round(probabilidades[1]* 100, 2)
+
     return render_template(
-        "logistic_regression/placeholder.html",
-        page_title="Logistic Regression Application",
-        page_type="Application"
+        "logistic_regression/applicationLogR.html",
+        resultado=resultado,
+        probabilidad=probabilidad
     )
 
 @app.route("/logistic_regression/evaluation-metrics")

@@ -169,48 +169,90 @@ model.fit(X, y)
                 Enter a value for <strong class="text-white">[VARIABLE X]</strong> to predict the corresponding class.
             </p>
 
-            <form method="post">
+            <form method="Post" action="{{url_for('logistic_regression_application')}}">
                 <div class="mb-3">
-                    <label for="variable_x" class="form-label text-white fw-bold">
-                        <i class="bi bi-sliders"></i> [VARIABLE X]
+                    <label for="palabras_sospechosas" class="form-label text-white fw-bold">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Palabras Sospechosas
                     </label>
+
                     <input type="number" 
-                           step="0.1" 
+                           step="1" 
                            min="0" 
                            class="form-control form-control-lg bg-dark text-white border-secondary" 
-                           id="variable_x" 
-                           name="variable_x" 
-                           placeholder="Example: 50"
+                           id="palabras_sospechosas" 
+                           name="palabras_sospechosas" 
+                           placeholder="Example: 7"
                            required>
-                    <small class="text-white-50">Enter a value to predict the classification</small>
+                        <small class="text-white-50">
+                            Number of suspicious words in the message
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cantidad_links" class="form-label text-white fw-bold">
+                            <i class="bi bi-link-45deg"></i>
+                            Cantidad de Links
+                        </label>
+                        <input type="number" 
+                               step="1" 
+                               min="0" 
+                               class="form-control form-control-lg bg-dark text-white border-secondary" 
+                               id="cantidad_links" 
+                               name="cantidad_links" 
+                               placeholder="Example: 3"
+                               required>
+                        <small class="text-white-50">
+                            Number of links in the message
+                        </small>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
-                    <i class="bi bi-rocket-takeoff"></i> Predict Class
+                    <i class="bi bi-rocket-takeoff"></i> 
+                    Clasificar Mensaje
                 </button>
             </form>
 
             <!-- RESULTADO -->
+             {% if prediction is not none %}
             <div class="mt-4 p-4 rounded-3 result-card">
                 <div class="row align-items-center">
                     <div class="col-md-6 text-md-start">
                         <h5 class="text-light">
-                            <i class="bi bi-check-circle text-success"></i> Prediction Result
+                            <i class="bi bi-check-circle text-success"></i>
+                            Prediction Result
                         </h5>
                         <p class="text-white-50">
-                            For [VARIABLE X] = <strong>50</strong>:
+                            Mensaje clasificado con:
+
+                            <br>
+                            <strong>Palabras sospechosas</strong>
+                            {{ request.form.get("palabras_sospechosas") }}
+                            <br>
+                            <strong>Cantidad de links</strong>
+                            {{ request.form.get("cantidad_links") }}
                         </p>
                     </div>
                     <div class="col-md-6 text-center">
+                        {% if prediction == 1 %}
                         <h2 class="display-4 fw-bold text-success">
-                            Class 1
+                            Spam
                         </h2>
                         <span class="badge bg-success">Predicted Class</span>
-                        <div class="mt-1">
-                            <small class="text-white-50">Probability: 0.87</small>
+                        {% else %}
+                        <h2 class="display-4 fw-bold text-danger">
+                            No Spam
+                        </h2>
+                        <span class="badge bg-danger">Predicted Class</span>
+                        {% endif %}
+                        <div class="mt-2">
+                            <small class="text-white-50">
+                                Probabilidad Spam: {{ probabilidad}}%
+                            </small>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 
