@@ -2,12 +2,12 @@ from flask import Flask, render_template, request
 
 # Logistic Regression Imports
 from logistic_Regression import ( 
-    clasificar_mensaje,
+    classify_message,
     accuracy as log_accuracy,
     precision as log_precision,
     recall as log_recall,
     f1 as log_f1,
-    matriz as log_matriz
+    confusion_matrix_result as log_matriz
 )
 
 # SVM Imports
@@ -177,22 +177,20 @@ def logistic_regression_application():
 
     if request.method == "POST":
         try:
-            suspicious_words = int(request.form.get("palabras_sospechosas"))
-            link_count = int(request.form.get("cantidad_links"))
-            
-            result, probabilities = clasificar_mensaje(
-                suspicious_words, link_count
-            )
+            suspicious_words = int(request.form.get("suspicious_words"))
+            number_of_links = int(request.form.get("number_of_links"))
+            result, probabilities = classify_message(suspicious_words,number_of_links)
             probability = round(probabilities[1] * 100, 2)
+
         except (ValueError, TypeError):
             result = "Invalid input values"
             probability = 0.0
 
     return render_template(
         "logistic_regression/applicationLogR.html",
-        resultado=result,
-        probabilidad=probability
-    )
+        result=result,
+        probability=probability)
+
 
 @app.route("/logistic_regression/evaluation-metrics")
 def logistic_regression_metrics():
@@ -202,9 +200,8 @@ def logistic_regression_metrics():
         precision=log_precision,
         recall=log_recall,
         f1=log_f1,
-        matriz=log_matriz
+        confusion_matrix=log_matriz
     )
-
 
  
 # 5. SUPPORT VECTOR MACHINE (SVM) ROUTES
