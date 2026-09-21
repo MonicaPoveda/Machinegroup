@@ -166,22 +166,22 @@ Evaluation Metrics - Logistic Regression
                                             <th>Actual: 0</th>
                                             <td>
                                                 <strong class="text-success">TN</strong><br>
-                                                {{ matriz[0][0] }}
+                                                {{ confusion_matrix[0][0] }}
                                             </td>
                                             <td>
                                                 <strong class="text-danger">FP</strong><br>
-                                                {{ matriz[0][1] }}
+                                                {{ confusion_matrix[0][1] }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Actual: 1</th>
                                             <td>
                                                 <strong class="text-danger">FN</strong><br>
-                                                {{ matriz[1][0] }}
+                                                {{ confusion_matrix[1][0] }}
                                             </td>
                                             <td>
                                                 <strong class="text-success">TP</strong><br>
-                                                {{ matriz[1][1] }}
+                                                {{ confusion_matrix[1][1] }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -298,13 +298,13 @@ Evaluation Metrics - Logistic Regression
                 <div class="p-4 rounded-3 bg-white bg-opacity-10 mt-4">
                     <p class="text-light mb-0">
                         The confusion matrix contains
-                        <strong class="text-white">{{ matriz[0][0] }}</strong>
+                        <strong class="text-white">{{ confusion_matrix[0][0] }}</strong>
                         True Negatives,
-                        <strong class="text-white">{{ matriz[0][1] }}</strong>
+                        <strong class="text-white">{{ confusion_matrix[0][1] }}</strong>
                         False Positives,
-                        <strong class="text-white">{{ matriz[1][0] }}</strong>
+                        <strong class="text-white">{{ confusion_matrix[1][0] }}</strong>
                         False Negatives, and
-                        <strong class="text-white">{{ matriz[1][1] }}</strong>
+                        <strong class="text-white">{{ confusion_matrix[1][1] }}</strong>
                         True Positives.
                     </p>
                 </div>
