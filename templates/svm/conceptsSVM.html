@@ -4,29 +4,25 @@
 Support Vector Machine
 {% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/concepts.css') }}">
-{% endblock %}
-
 {% block content %}
 
-<div class="concepts-page pt-5 mt-5 pb-5">
+<div class="pt-5 mt-5 pb-5">
     <div class="container">
 
         <!-- PAGE HEADER -->
-        <div class="text-center mb-5 concept-hero">
+        <div class="text-center mb-5">
 
-            <span class="section-label text-uppercase fw-bold text-primary">
+            <span class="d-inline-flex align-items-center text-primary text-uppercase fw-semibold">
                 <span class="section-line"></span>
                 MACHINE LEARNING ALGORITHM
                 <span class="section-line"></span>
             </span>
 
-            <h1 class="hero-title mt-3 mb-3">
-                Support <span>Vector Machine</span>
+            <h1 class="display-2 fw-bold text-white mt-3 mb-3">
+                Support <span class="text-primary">Vector Machine</span>
             </h1>
 
-            <p class="hero-description mx-auto">
+            <p class="text-light lead mx-auto" style="max-width: 760px;">
                 Learn how Support Vector Machine separates data into different classes
                 and makes accurate predictions using an optimal decision boundary.
             </p>
@@ -35,21 +31,21 @@ Support Vector Machine
 
 
         <!-- LEARNING PATH NAV -->
-        <nav class="path-nav mb-5" aria-label="Learning path">
-            <a href="#definition" data-target="definition">Definition</a>
-            <a href="#how-it-works" data-target="how-it-works">How It Works</a>
-            <a href="#problems" data-target="problems">Problems</a>
-            <a href="#characteristics" data-target="characteristics">Characteristics</a>
-            <a href="#advantages" data-target="advantages">Advantages</a>
-            <a href="#limitations" data-target="limitations">Limitations</a>
-            <a href="#example" data-target="example">Real-World Example</a>
+        <nav class="path-nav nav nav-pills justify-content-center flex-wrap gap-1 mx-auto mb-5 px-2 py-2 rounded-pill border border-primary border-opacity-50 shadow-sm sticky-top" aria-label="Learning path" style="top: 78px; max-width: 980px; background-color: rgba(3, 12, 25, 0.88); backdrop-filter: blur(10px); z-index: 1020;">
+            <a class="nav-link active text-white" href="#definition" data-target="definition">Definition</a>
+            <a class="nav-link text-white" href="#how-it-works" data-target="how-it-works">How It Works</a>
+            <a class="nav-link text-white" href="#problems" data-target="problems">Problems</a>
+            <a class="nav-link text-white" href="#characteristics" data-target="characteristics">Characteristics</a>
+            <a class="nav-link text-white" href="#advantages" data-target="advantages">Advantages</a>
+            <a class="nav-link text-white" href="#limitations" data-target="limitations">Limitations</a>
+            <a class="nav-link text-white" href="#example" data-target="example">Real-World Example</a>
         </nav>
 
 
         <!-- SECTION 1: DEFINITION -->
         <section id="definition" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="row align-items-center g-4">
 
@@ -146,7 +142,7 @@ Support Vector Machine
         <!-- SECTION 2: HOW IT WORKS -->
         <section id="how-it-works" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -178,9 +174,9 @@ Support Vector Machine
 
 
                 <!-- PROCESS FLOW -->
-                <div class="prediction-flow mb-5">
+                <div class="prediction-flow d-flex flex-row flex-nowrap align-items-center justify-content-start gap-3 mb-5 overflow-x-auto w-100 pb-2">
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-database fs-3 d-block mb-2"
                            style="color: var(--color-accent);">
@@ -195,12 +191,12 @@ Support Vector Machine
                     </div>
 
 
-                    <div class="prediction-arrow">
+                    <div class="prediction-arrow flex-shrink-0 text-primary fs-4">
                         <i class="bi bi-arrow-right"></i>
                     </div>
 
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-search fs-3 d-block mb-2"
                            style="color: var(--color-accent);">
@@ -215,12 +211,12 @@ Support Vector Machine
                     </div>
 
 
-                    <div class="prediction-arrow">
+                    <div class="prediction-arrow flex-shrink-0 text-primary fs-4">
                         <i class="bi bi-arrow-right"></i>
                     </div>
 
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-bounding-box fs-3 d-block mb-2"
                            style="color: var(--color-accent);">
@@ -235,12 +231,12 @@ Support Vector Machine
                     </div>
 
 
-                    <div class="prediction-arrow">
+                    <div class="prediction-arrow flex-shrink-0 text-primary fs-4">
                         <i class="bi bi-arrow-right"></i>
                     </div>
 
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-check2-circle fs-3 d-block mb-2 text-success">
                         </i>
@@ -355,7 +351,7 @@ Support Vector Machine
         <!-- SECTION 3: TYPES OF PROBLEMS -->
         <section id="problems" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -461,7 +457,7 @@ Support Vector Machine
         <!-- SECTION 4: CHARACTERISTICS -->
         <section id="characteristics" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -627,7 +623,7 @@ Support Vector Machine
         <!-- SECTION 5: ADVANTAGES -->
         <section id="advantages" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -757,7 +753,7 @@ Support Vector Machine
         <!-- SECTION 6: LIMITATIONS -->
         <section id="limitations" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -900,7 +896,7 @@ Support Vector Machine
         <!-- SECTION 7: REAL-WORLD EXAMPLE -->
         <section id="example" class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5">
 
                 <div class="d-flex align-items-center mb-4">
 
@@ -998,9 +994,9 @@ Support Vector Machine
 
 
                 <!-- EXAMPLE FLOW -->
-                <div class="prediction-flow">
+                <div class="prediction-flow d-flex flex-row flex-nowrap align-items-center justify-content-start gap-3 overflow-x-auto w-100 pb-2">
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-envelope fs-3 d-block mb-2"
                            style="color: var(--color-accent);">
@@ -1015,12 +1011,12 @@ Support Vector Machine
                     </div>
 
 
-                    <div class="prediction-arrow">
+                    <div class="prediction-arrow flex-shrink-0 text-primary fs-4">
                         <i class="bi bi-arrow-right"></i>
                     </div>
 
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-cpu fs-3 d-block mb-2"
                            style="color: var(--color-accent);">
@@ -1035,12 +1031,12 @@ Support Vector Machine
                     </div>
 
 
-                    <div class="prediction-arrow">
+                    <div class="prediction-arrow flex-shrink-0 text-primary fs-4">
                         <i class="bi bi-arrow-right"></i>
                     </div>
 
 
-                    <div class="prediction-node">
+                    <div class="prediction-node flex-shrink-0 text-center p-3 rounded-3 bg-dark bg-opacity-25">
 
                         <i class="bi bi-check2-circle fs-3 d-block mb-2 text-success">
                         </i>
@@ -1076,7 +1072,7 @@ Support Vector Machine
         <!-- SUMMARY -->
         <section class="concept-section mb-5">
 
-            <div class="concept-card p-4 p-md-5 text-center">
+            <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg text-white p-4 p-md-5 text-center">
 
                 <h2 class="concept-title mb-3">
                     SVM in One Idea
