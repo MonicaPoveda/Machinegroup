@@ -65,6 +65,10 @@ def what_is_ml():
 def types():
     return render_template("machine_learning/types.html")
 
+@app.route("/unsupervised/concepts")
+def unsupervised_concepts():
+    return render_template("unsupervised_learning/concepts.html")
+
 @app.route("/use_cases")
 def use_cases():
     return render_template("machine_learning/use_cases/use_cases.html")
