@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
-
+import os  
+import pandas as pd 
+from reinforcement import train, GRID, START, GOAL, ACTION_NAMES
 # Logistic Regression Imports
 from logistic_Regression import ( 
     classify_message,
@@ -68,6 +70,39 @@ def types():
 @app.route("/unsupervised/concepts")
 def unsupervised_concepts():
     return render_template("unsupervised_learning/concepts.html")
+
+
+
+
+@app.route("/unsupervised/manual-exercise")
+def unsupervised_manual():
+    base = os.path.join(app.root_path, "static", "datasets")
+
+    df = pd.read_csv(os.path.join(base, "manual_customers.csv"))
+    df = df.rename(columns={
+        "Annual_Income": "annual_income",
+        "Spending_Score": "spending_score",
+    })
+
+    iterations = []
+    for n in [1, 2, 3]:
+        it_df = pd.read_csv(os.path.join(base, f"iteration_{n}_records.csv"))
+        iterations.append({
+            "n": n,
+            "data_preview": it_df.head(10).to_dict(orient="records"),
+            "data_full": it_df.to_dict(orient="records"),
+        })
+
+    return render_template(
+        "unsupervised_learning/manual.html",
+        manual_num_records=len(df),
+        manual_data_preview=df.head(10).to_dict(orient="records"),
+        manual_data_full=df.to_dict(orient="records"),
+        iterations=iterations,
+    )
+@app.route("/unsupervised/application")
+def unsupervised_application():
+    return render_template("unsupervised_learning/application.html")
 
 @app.route("/use_cases")
 def use_cases():
@@ -278,7 +313,21 @@ def svm_evalMetrics():
         interpretation=interpretation
     )
 
+# @app.route('/reinforcement', methods=['GET', 'POST']) 
+# def reinforcement():
+#     result = None 
 
+#     if request.method == 'POST': 
+#         result = train(episodes=1000)
+
+#     return render_template(
+#         'reinforcement.html', 
+#         result=result, 
+#         grid=GRID, 
+#         start=START, 
+#         goal=GOAL, 
+#         actions=ACTION_NAMES # (Opcional) Quité la coma extra que tenías aquí
+#     )
  
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
