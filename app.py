@@ -99,9 +99,28 @@ def unsupervised_manual():
         manual_data_full=df.to_dict(orient="records"),
         iterations=iterations,
     )
+
+
+
+from kmeans_model import generate_clusters
 @app.route("/unsupervised/application")
 def unsupervised_application():
-    return render_template("unsupervised_learning/application.html")
+    (df, centroids, score, plot_url, summary, 
+     num_records, data_preview,
+     income_min, income_max, score_min, score_max) = generate_clusters()
+    
+    return render_template("unsupervised_learning/application.html",
+                         centroids=centroids,
+                         score=score,
+                         plot_url=plot_url,
+                         summary=summary,
+                         num_records=num_records,
+                         data_preview=data_preview,
+                         income_min=income_min,
+                         income_max=income_max,
+                         score_min=score_min,
+                         score_max=score_max)
+
 
 @app.route("/use_cases")
 def use_cases():
