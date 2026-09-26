@@ -22,15 +22,16 @@ Unsupervised Machine Learning — Manual Exercise
     </div>
 
     <!-- Navigation between pages -->
-    <nav class="nav nav-pills justify-content-center 
-    flex-wrap gap-1 mx-auto mb-5 px-2 py-2 rounded-pill border 
-    border-primary border-opacity-50 shadow-sm sticky-top" 
-    style="top: 78px; max-width: 700px; background-color: rgba(3, 12, 25, 0.88); 
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    z-index: 1020;">
-        <a class="nav-link text-white" href="{{ url_for('unsupervised_concepts') }}">Concepts</a>
-        <a class="nav-link active text-white" href="{{ url_for('unsupervised_manual') }}">Manual Exercise</a>
-        <a class="nav-link text-white" href="{{ url_for('unsupervised_application') }}">Application</a>
+    <nav id="pathNav" class="nav nav-pills justify-content-center flex-wrap gap-1 mx-auto mb-5 px-2 py-2 rounded-pill border border-primary border-opacity-50 shadow-sm sticky-top"
+         aria-label="Manual exercise sections"
+         style="top: 78px; max-width: 1100px; background-color: rgba(3, 12, 25, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1020;">
+        <a class="nav-link active text-white" href="#dataset">Dataset</a>
+        <a class="nav-link text-white" href="#initial-centroids">Initial centroids</a>
+        <a class="nav-link text-white" href="#iteration-1">Iteration 1</a>
+        <a class="nav-link text-white" href="#iteration-2">Iteration 2</a>
+        <a class="nav-link text-white" href="#iteration-3">Iteration 3</a>
+        <a class="nav-link text-white" href="#variance">Variance</a>
+        <a class="nav-link text-white" href="#interpretation">Interpretation</a>
     </nav>
 
     <!-- Manual Exercise (Part 1) -->
@@ -38,7 +39,7 @@ Unsupervised Machine Learning — Manual Exercise
         <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg p-4 p-md-5">
 
             <!-- Dataset context -->
-            <div class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a;">
+            <div id="dataset" class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a; scroll-margin-top: 105px;">
                 <p class="text-primary text-uppercase fw-bold small mb-2">Dataset context</p>
                 <p class="text-light mb-2">
                     <strong class="text-white">Mall Customer Segmentation dataset</strong> (Badrnezhad, H., 2026, Kaggle) — 100 store customers identified by a CustomerID (1000–1099). For each customer, the annual income and the spending score assigned by the store are recorded. The goal is to segment customers into groups with similar purchasing behavior.
@@ -116,7 +117,7 @@ Unsupervised Machine Learning — Manual Exercise
             </div>
 
             <!-- Initial centroids & starting point -->
-            <div class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a;">
+            <div id="initial-centroids" class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a; scroll-margin-top: 105px;">
                 <p class="text-primary text-uppercase fw-bold small mb-2">Initial Centroids &amp; Starting Point</p>
                 <p class="text-light small mb-3">
                     Before the algorithm runs, 3 initial centroids are chosen manually as reference points. The image below
@@ -158,7 +159,7 @@ Unsupervised Machine Learning — Manual Exercise
 
             <!-- Iterations 1-3 -->
             {% for it in iterations %}
-            <div class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a;">
+            <div id="iteration-{{ it.n }}" class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a; scroll-margin-top: 105px;">
                 <p class="text-primary text-uppercase fw-bold small mb-2">Iteration {{ it.n }}</p>
                 <p class="text-light small mb-3">
                     {% if it.n == 1 %}
@@ -169,12 +170,35 @@ Unsupervised Machine Learning — Manual Exercise
                 </p>
 
                 <p class="text-light opacity-75 small mb-2">Centroids used as input for this iteration</p>
-                <!-- IMAGE: centroids used as input for this iteration -->
-                <div class="text-center mb-4">
-                    <img src="{{ url_for('static', filename='images/unsupervisedManual/centroids' ~ it.n ~ '.png') }}" alt="Centroids used as input for iteration {{ it.n }}" class="img-fluid rounded-3 shadow">
+                <div class="row align-items-center g-4 mb-4">
+                    <div class="col-12 col-md-6 {% if it.n == 2 %}order-md-2{% endif %}">
+                        <h3 class="h5 text-white">Centroids entering iteration {{ it.n }}</h3>
+                        {% if it.n == 1 %}
+                        <p class="text-light mb-2">This first pass starts from the three manually selected centers: C1 at (15, 78), C2 at (51.3, 59), and C3 at (89.1, 3). These are starting guesses, not groups learned from the customer records.</p>
+                        <p class="text-light mb-0">The image lists the exact centers used to calculate each customer's distance in this pass.</p>
+                        {% elif it.n == 2 %}
+                        <p class="text-light mb-2">These centers are the averages calculated from the groups formed in iteration 1. The starting guesses have now moved toward the customers assigned to them.</p>
+                        <p class="text-light mb-0">Each customer is measured against this updated set, so some assignments can change when a different center is now closer.</p>
+                        {% else %}
+                        <p class="text-light mb-2">This pass uses the centers recalculated in iteration 2. They already represent the observed customer groups more closely than the manual starting points.</p>
+                        <p class="text-light mb-0">The distance table lets us check whether another reassignment is needed or whether most customers remain with the same group.</p>
+                        {% endif %}
+                    </div>
+                    <figure class="col-12 col-md-6 mb-0 {% if it.n == 2 %}order-md-1{% endif %}">
+                        <figcaption class="text-light small mb-2">Input centers for iteration {{ it.n }}</figcaption>
+                        <img src="{{ url_for('static', filename='images/unsupervisedManual/centroids' ~ it.n ~ '.png') }}" alt="Centroids used as input for iteration {{ it.n }}" class="img-fluid rounded-3">
+                    </figure>
                 </div>
 
-                <p class="text-light opacity-75 small mb-2">Distances to each centroid, cluster assignment, and squared distance to the new centroid</p>
+                <h3 class="h5 text-white mb-2">Distances and customer assignments</h3>
+                <p class="text-light mb-2">For each customer, compare the three distance columns and assign the record to the closest centroid. The preview shows the first 10 of {{ it.data_full|length }} records; expand the table below to inspect every calculation.</p>
+                {% if it.n == 1 %}
+                <p class="text-light mb-3">After this first assignment, the groups contain 18, 71, and 11 customers. The large central group reflects how the initial centers divide this dataset before they have had a chance to move.</p>
+                {% elif it.n == 2 %}
+                <p class="text-light mb-3">The second assignment changes the group sizes to 24, 58, and 18 customers. Comparing these with iteration 1 shows customers moving toward centers that better represent their feature values.</p>
+                {% else %}
+                <p class="text-light mb-3">The final pass produces groups of 25, 56, and 19 customers. Only two records change groups from iteration 2, a sign that the assignments are becoming stable.</p>
+                {% endif %}
                 <div class="table-responsive rounded-3 overflow-auto mb-3">
                     <table class="table table-hover align-middle mb-0 text-light" style="background-color: #002e5f;">
                         <thead>
@@ -243,32 +267,46 @@ Unsupervised Machine Learning — Manual Exercise
                     </div>
                 </div>
 
-                <p class="text-light opacity-75 small mb-2">Updated centroids and within-cluster variance calculation</p>
-                <!-- IMAGE: new centroids + SSE/variance calculation for this iteration -->
-                <div class="text-center mb-3">
-                    <img src="{{ url_for('static', filename='images/unsupervisedManual/new' ~ it.n ~ '.png') }}" alt="Updated centroids and variance calculation for iteration {{ it.n }}" class="img-fluid rounded-3 shadow">
+                <p class="text-light opacity-75 small mb-2">Results of iteration {{ it.n }}</p>
+                <div class="row align-items-center g-4 mb-4">
+                    <figure class="col-12 col-md-6 mb-0 {% if it.n == 2 %}order-md-2{% endif %}">
+                        <figcaption class="text-light small mb-2">Updated centers and within-cluster calculation</figcaption>
+                        <img src="{{ url_for('static', filename='images/unsupervisedManual/new' ~ it.n ~ '.png') }}" alt="Updated centroids and variance calculation for iteration {{ it.n }}" class="img-fluid rounded-3">
+                    </figure>
+                    <div class="col-12 col-md-6 {% if it.n == 2 %}order-md-1{% endif %}">
+                        <h3 class="h5 text-white">How the centers and error change</h3>
+                        <p class="text-light">Each new center is the average position of the customers assigned to its cluster. The calculation image records those updated centers and the squared distances used to measure how tightly the customers fit around them.</p>
+                        {% if it.n == 1 %}
+                        <p class="text-light mb-0">The total variance falls from 629.01 before grouping to 236.19. The first assignment creates coherent groups, so customers are much closer to their new centers.</p>
+                        {% elif it.n == 2 %}
+                        <p class="text-light mb-0">Variance falls again, from 236.19 to 169.14. The centers move closer to the current memberships, reducing the total squared distance within the groups.</p>
+                        {% else %}
+                        <p class="text-light mb-0">Variance changes only slightly, from 169.14 to 167.20. This small improvement, together with just two reassigned records, indicates that the result is nearly stable.</p>
+                        {% endif %}
+                    </div>
                 </div>
-                <p class="text-light small mb-4">
-                    SSE (sum of squared distances to the new centroid) and variance (SSE / n) measure how compact each cluster is — the lower the value, the tighter the group.
-                    {% if it.n == 1 %}
-                    In this iteration the total variance is <strong class="text-white">236.19</strong>, down from <strong class="text-white">629.01</strong> before any grouping — a large drop, since the data went from being completely ungrouped to 3 defined clusters.
-                    {% elif it.n == 2 %}
-                    In this iteration the total variance is <strong class="text-white">169.14</strong>, compared to <strong class="text-white">236.19</strong> in iteration 1 — a further improvement as the centroids settle closer to the center of their groups.
-                    {% else %}
-                    In this iteration the total variance is <strong class="text-white">167.20</strong>, compared to <strong class="text-white">169.14</strong> in iteration 2 — only a small further change, which means the clustering is nearly stable.
-                    {% endif %}
-                </p>
-
-                <p class="text-light opacity-75 small mb-2">Cluster scatter plot</p>
-                <!-- IMAGE: scatter plot with clusters and updated centroids for this iteration -->
-                <div class="text-center">
-                    <img src="{{ url_for('static', filename='images/unsupervisedManual/plot' ~ it.n ~ '.png') }}" alt="Scatter plot with clusters and updated centroids for iteration {{ it.n }}" class="img-fluid rounded-3 shadow">
+                <div class="row align-items-center g-4 mb-3">
+                    <div class="col-12 col-md-6 {% if it.n == 2 %}order-md-2{% endif %}">
+                        <h3 class="h5 text-white">Reading the cluster plot</h3>
+                        <p class="text-light">Each point represents a customer positioned by annual income and spending score. Colors show the assigned groups, while the marked centers show where each cluster sits after this update.</p>
+                        {% if it.n == 1 %}
+                        <p class="text-light mb-0">Use this as the first result map: the groups are being formed around the manually chosen centers, and later passes will refine their boundaries.</p>
+                        {% elif it.n == 2 %}
+                        <p class="text-light mb-0">Compare this plot with iteration 1 to see the effect of moving the centers and reassessing each customer's nearest group.</p>
+                        {% else %}
+                        <p class="text-light mb-0">Compare this final plot with iteration 2. The cluster layout changes very little because only two customers were reassigned in this pass.</p>
+                        {% endif %}
+                    </div>
+                    <figure class="col-12 col-md-6 mb-0 {% if it.n == 2 %}order-md-1{% endif %}">
+                        <figcaption class="text-light small mb-2">Customer clusters after iteration {{ it.n }}</figcaption>
+                        <img src="{{ url_for('static', filename='images/unsupervisedManual/plot' ~ it.n ~ '.png') }}" alt="Scatter plot of customer clusters and updated centroids after iteration {{ it.n }}" class="img-fluid rounded-3">
+                    </figure>
                 </div>
             </div>
             {% endfor %}
 
             <!-- Variance comparison -->
-            <div class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a;">
+            <div id="variance" class="p-4 rounded-3 border border-primary border-opacity-25 mb-4" style="background-color: #00152a; scroll-margin-top: 105px;">
                 <p class="text-primary text-uppercase fw-bold small mb-2">Within-Cluster Variance Comparison</p>
                 <p class="text-light small mb-4">
                     Measure used in every iteration: SSE = sum of the squared distances from each record to the centroid of its cluster (using the new centroid). Variance = SSE / N. The lower it is, the more compact the groups.
@@ -290,12 +328,15 @@ Unsupervised Machine Learning — Manual Exercise
                         </tbody>
                     </table>
 
-                    <!-- IMAGE: initial centroids table + justification of the chosen starting points -->
-                <div class="text-center mb-4">
-                    <img src="{{ url_for('static', filename='images/unsupervisedManual/variance.png') }}" 
-                    alt="Initial centroids table and justification of the chosen starting points" class="img-fluid rounded-3 shadow">
                 </div>
-                </div>
+                <figure class="text-center mb-4 p-3 rounded-3 border border-primary border-opacity-25" style="background-color: #002e5f;">
+                    <figcaption class="text-light small fw-semibold mb-3">Variance by iteration</figcaption>
+                    <img src="{{ url_for('static', filename='images/unsupervisedManual/variance.png') }}" alt="Chart comparing within-cluster variance across iterations" class="img-fluid rounded-2" style="max-height: 360px; background-color: #fff;">
+                </figure>
+
+                <p class="text-light small mb-4">
+                    The overall variance drops from 629.01 before grouping to 236.19 after iteration 1, then to 169.14 and 167.20. The biggest improvement happens in the first pass; the final reduction is only 1.94, which agrees with the small change between iterations 2 and 3.
+                </p>
 
                 <p class="text-primary text-uppercase fw-bold small mb-2">Variance of Each Cluster (cluster SSE / cluster n)</p>
                 <div class="table-responsive rounded-3 overflow-auto">
@@ -318,15 +359,25 @@ Unsupervised Machine Learning — Manual Exercise
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-3">
+                    <p class="text-light small mb-2">
+                        <strong class="text-white">Iteration 1:</strong> Cluster 2 has the highest variance (276.98) and the most customers (71), so its members are more spread around their center. Cluster 1 is the most compact (118.66, 18 customers); Cluster 3 is between them (165.24, 11 customers).
+                    </p>
+                    <p class="text-light small mb-2">
+                        <strong class="text-white">Iteration 2:</strong> Cluster 3 now has the highest variance (203.11, 18 customers), while Cluster 2 has the lowest (160.90, 58 customers). Cluster 1 is close to Cluster 2 at 163.58, with 24 customers.
+                    </p>
+                    <p class="text-light small mb-0">
+                        <strong class="text-white">Iteration 3:</strong> Cluster 3 remains the most spread out (216.59, 19 customers), and Cluster 2 is the most compact (150.33, 56 customers). Cluster 1 is between them at 167.45, with 25 customers. These per-cluster values show that a stable overall result can still contain groups with different levels of compactness.
+                    </p>
+                </div>
             </div>
 
             <!-- Final interpretation -->
-            <div class="p-4 rounded-3 border border-primary border-opacity-25" style="background-color: #00152a;">
+            <div id="interpretation" class="p-4 rounded-3 border border-primary border-opacity-25" style="background-color: #00152a; scroll-margin-top: 105px;">
                 <p class="text-primary text-uppercase fw-bold small mb-3">Final Interpretation of the Manual Exercise</p>
-                <!-- IMAGE: initial centroids table + justification of the chosen starting points -->
                 <div class="text-center mb-4">
                     <img src="{{ url_for('static', filename='images/unsupervisedManual/interpretation1.1.png') }}" 
-                    alt="Initial centroids table and justification of the chosen starting points" 
+                    alt="Visual summary of the final customer clusters" 
                     class="img-fluid rounded-3 shadow">
                 </div>
 
