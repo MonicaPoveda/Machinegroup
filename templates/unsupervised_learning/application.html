@@ -577,46 +577,20 @@
             </p>
 
             <div class="row g-3">
+                {% for cluster_id, info in interpretations.items() %}
                 <div class="col-12 col-md-4">
                     <div class="p-3 rounded-3 h-100" style="background-color: #00152a;">
-                        <span class="badge bg-info mb-2">Cluster 0</span>
-                        <p class="text-white fw-semibold mb-1">Average Customers</p>
-                        <p class="text-light opacity-75 small mb-0">Average income and average spending. Regular customers.</p>
+                        <span class="badge bg-info mb-2">Cluster {{ cluster_id }}</span>
+                        <p class="text-white fw-semibold mb-1">{{ info.title }}</p>
+                        <p class="text-light opacity-75 small mb-0">{{ info.description }}</p>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3 h-100" style="background-color: #00152a;">
-                        <span class="badge bg-info mb-2">Cluster 1</span>
-                        <p class="text-white fw-semibold mb-1">Careful Spenders</p>
-                        <p class="text-light opacity-75 small mb-0">High income but low spending. Cautious with money.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3 h-100" style="background-color: #00152a;">
-                        <span class="badge bg-info mb-2">Cluster 2</span>
-                        <p class="text-white fw-semibold mb-1">Conservative</p>
-                        <p class="text-light opacity-75 small mb-0">Very high income but very low spending. Savers.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3 h-100" style="background-color: #00152a;">
-                        <span class="badge bg-info mb-2">Cluster 3</span>
-                        <p class="text-white fw-semibold mb-1">Moderate</p>
-                        <p class="text-light opacity-75 small mb-0">Average income and average spending. Similar to Cluster 0.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="p-3 rounded-3 h-100" style="background-color: #00152a;">
-                        <span class="badge bg-info mb-2">Cluster 4</span>
-                        <p class="text-white fw-semibold mb-1">Impulsive Buyers</p>
-                        <p class="text-light opacity-75 small mb-0">Low income but high spending. Spend more than they earn.</p>
-                    </div>
-                </div>
+                {% endfor %}
                 <div class="col-12 col-md-4">
                     <div class="p-3 rounded-3 h-100" style="background-color: rgba(25, 135, 84, 0.10);">
                         <span class="badge bg-success mb-2">Silhouette Score</span>
                         <p class="text-white fw-semibold mb-1">{{ "%.4f"|format(score) }}</p>
-                        <p class="text-light opacity-75 small mb-0">Reasonable clustering structure.</p>
+                        <p class="text-light opacity-75 small mb-0">{{ silhouette_interpretation }}</p>
                     </div>
                 </div>
             </div>
