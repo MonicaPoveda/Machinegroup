@@ -59,21 +59,69 @@ def generate_clusters():
         'Cluster': 'count'
     }).rename(columns={'Cluster': 'Count'}).round(2)
     
-    # 10. Dataset statistics
+    # 10. Cluster interpretation
+    interpretations = {}
+
+    income_mean = df['Annual Income (k$)'].mean()
+    score_mean = df['Spending Score (1-100)'].mean()
+
+    for cluster_id, row in summary.iterrows():
+        income = row['Annual Income (k$)']
+        spending = row['Spending Score (1-100)']
+
+        if income >= income_mean and spending >= score_mean:
+            title = "High Income / High Spending"
+            description = "Customers with above-average income and above-average spending."
+        elif income >= income_mean and spending < score_mean:
+            title = "High Income / Low Spending"
+            description = "Customers with above-average income and below-average spending."
+        elif income < income_mean and spending >= score_mean:
+            title = "Low Income / High Spending"
+            description = "Customers with below-average income and above-average spending."
+        else:
+            title = "Low Income / Low Spending"
+            description = "Customers with below-average income and below-average spending."
+
+        interpretations[int(cluster_id)] = {
+            "title": title,
+            "description": description
+        }
+
+    # 11. Dataset statistics
     num_records = len(df)
-    
-    # 11. Data preview with cluster assignment (first 20 records)
-    data_preview = df[['CustomerID','Annual Income (k$)','Splending Score (1-100)','Cluster']].head(20).values.to_dict('records')
-    
-    # 12. Data ranges
+
+    # 12. Complete data and preview with cluster assignment
+    data_columns = [
+        'CustomerID',
+        'Annual Income (k$)',
+        'Spending Score (1-100)',
+        'Cluster'
+    ]
+
+    data_full = df[data_columns].to_dict(orient='records')
+    data_preview = data_full[:20]
+
+    # 13. Data ranges
     income_min = df['Annual Income (k$)'].min()
     income_max = df['Annual Income (k$)'].max()
     score_min = df['Spending Score (1-100)'].min()
     score_max = df['Spending Score (1-100)'].max()
 
-    return (df, centroids, score, plot_url, summary, 
-            num_records, data_preview,
-            income_min, income_max, score_min, score_max)
+    return (
+        df,
+        centroids,
+        score,
+        plot_url,
+        summary,
+        num_records,
+        data_preview,
+        data_full,
+        income_min,
+        income_max,
+        score_min,
+        score_max,
+        interpretations
+    )
 
 
 if __name__ == "__main__":
