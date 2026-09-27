@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-
+import os  
+import pandas as pd 
 # Logistic Regression Imports
 from logistic_Regression import ( 
     classify_message,
@@ -64,6 +65,128 @@ def what_is_ml():
 @app.route("/types/")
 def types():
     return render_template("machine_learning/types.html")
+
+@app.route("/unsupervised/concepts")
+def unsupervised_concepts():
+    return render_template("unsupervised_learning/concepts.html")
+
+
+
+
+@app.route("/unsupervised/manual-exercise")
+def unsupervised_manual():
+    base = os.path.join(app.root_path, "static", "datasets")
+
+    df = pd.read_csv(os.path.join(base, "manual_customers.csv"))
+    df = df.rename(columns={
+        "Annual_Income": "annual_income",
+        "Spending_Score": "spending_score",
+    })
+
+    iterations = []
+    for n in [1, 2, 3]:
+        it_df = pd.read_csv(os.path.join(base, f"iteration_{n}_records.csv"))
+        iterations.append({
+            "n": n,
+            "data_preview": it_df.head(10).to_dict(orient="records"),
+            "data_full": it_df.to_dict(orient="records"),
+        })
+
+    return render_template(
+        "unsupervised_learning/manual.html",
+        manual_num_records=len(df),
+        manual_data_preview=df.head(10).to_dict(orient="records"),
+        manual_data_full=df.to_dict(orient="records"),
+        iterations=iterations
+    )
+
+
+
+from kmeans_model import generate_clusters
+@app.route("/unsupervised/application")
+def unsupervised_application():
+    (
+        df, centroids, score, plot_url, summary,
+        num_records, data_preview, data_full,
+        income_min, income_max, score_min, score_max,
+        interpretations
+    ) = generate_clusters()
+
+    if score >= 0.50:
+        silhouette_interpretation = (
+            "The clustering structure is well separated: records are generally "
+            "close to their assigned cluster and far from other clusters."
+        )
+    elif score >= 0.25:
+        silhouette_interpretation = (
+            "The clustering structure is reasonable, although some records "
+            "may overlap with neighboring clusters."
+        )
+    else:
+        silhouette_interpretation = (
+            "The clustering structure has substantial overlap between groups; "
+            "the cluster assignments should therefore be interpreted with caution."
+        )
+
+    return render_template(
+        "unsupervised_learning/application.html",
+        centroids=centroids,
+        score=score,
+        plot_url=plot_url,
+        summary=summary,
+        num_records=num_records,
+        data_preview=data_preview,
+        data_full=data_full,
+        income_min=income_min,
+        income_max=income_max,
+        score_min=score_min,
+        score_max=score_max,
+        interpretations=interpretations,
+        silhouette_interpretation=silhouette_interpretation
+    )
+
+
+@app.route("/unsupervised/evaluation-metrics")
+def unsupervised_evalMetrics():
+    (
+        df, centroids, score, plot_url, summary,
+        num_records, data_preview, data_full,
+        income_min, income_max, score_min, score_max,
+        interpretations
+    ) = generate_clusters()
+
+    if score >= 0.50:
+        silhouette_interpretation = (
+            "The clustering structure is well separated: records are generally "
+            "close to their assigned cluster and far from other clusters."
+        )
+    elif score >= 0.25:
+        silhouette_interpretation = (
+            "The clustering structure is reasonable, although some records "
+            "may overlap with neighboring clusters."
+        )
+    else:
+        silhouette_interpretation = (
+            "The clustering structure has substantial overlap between groups; "
+            "the cluster assignments should therefore be interpreted with caution."
+        )
+
+    return render_template(
+        "unsupervised_learning/evalMetrics.html",
+        centroids=centroids,
+        score=score,
+        plot_url=plot_url,
+        summary=summary,
+        num_records=num_records,
+        data_preview=data_preview,
+        data_full=data_full,
+        income_min=income_min,
+        income_max=income_max,
+        score_min=score_min,
+        score_max=score_max,
+        interpretations=interpretations,
+        silhouette_interpretation=silhouette_interpretation
+    )
 
 @app.route("/use_cases")
 def use_cases():
@@ -274,7 +397,21 @@ def svm_evalMetrics():
         interpretation=interpretation
     )
 
+# @app.route('/reinforcement', methods=['GET', 'POST']) 
+# def reinforcement():
+#     result = None 
 
+#     if request.method == 'POST': 
+#         result = train(episodes=1000)
+
+#     return render_template(
+#         'reinforcement.html', 
+#         result=result, 
+#         grid=GRID, 
+#         start=START, 
+#         goal=GOAL, 
+#         actions=ACTION_NAMES # (Opcional) Quité la coma extra que tenías aquí
+#     )
  
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
