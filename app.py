@@ -97,8 +97,7 @@ def unsupervised_manual():
         manual_num_records=len(df),
         manual_data_preview=df.head(10).to_dict(orient="records"),
         manual_data_full=df.to_dict(orient="records"),
-        iterations=iterations,
-        data_full=data_full
+        iterations=iterations
     )
 
 
@@ -146,6 +145,48 @@ def unsupervised_application():
         silhouette_interpretation=silhouette_interpretation
     )
 
+
+@app.route("/unsupervised/evaluation-metrics")
+def unsupervised_evalMetrics():
+    (
+        df, centroids, score, plot_url, summary,
+        num_records, data_preview, data_full,
+        income_min, income_max, score_min, score_max,
+        interpretations
+    ) = generate_clusters()
+
+    if score >= 0.50:
+        silhouette_interpretation = (
+            "The clustering structure is well separated: records are generally "
+            "close to their assigned cluster and far from other clusters."
+        )
+    elif score >= 0.25:
+        silhouette_interpretation = (
+            "The clustering structure is reasonable, although some records "
+            "may overlap with neighboring clusters."
+        )
+    else:
+        silhouette_interpretation = (
+            "The clustering structure has substantial overlap between groups; "
+            "the cluster assignments should therefore be interpreted with caution."
+        )
+
+    return render_template(
+        "unsupervised_learning/evalMetrics.html",
+        centroids=centroids,
+        score=score,
+        plot_url=plot_url,
+        summary=summary,
+        num_records=num_records,
+        data_preview=data_preview,
+        data_full=data_full,
+        income_min=income_min,
+        income_max=income_max,
+        score_min=score_min,
+        score_max=score_max,
+        interpretations=interpretations,
+        silhouette_interpretation=silhouette_interpretation
+    )
 
 @app.route("/use_cases")
 def use_cases():
