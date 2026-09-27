@@ -63,7 +63,7 @@ def generate_clusters():
     num_records = len(df)
     
     # 11. Data preview with cluster assignment (first 20 records)
-    data_preview = df[['CustomerID', 'Annual Income (k$)', 'Spending Score (1-100)', 'Cluster']].head(20).to_dict('records')
+    data_preview = df[['CustomerID','Annual Income (k$)','Splending Score (1-100)','Cluster']].head(20).values.to_dict('records')
     
     # 12. Data ranges
     income_min = df['Annual Income (k$)'].min()
