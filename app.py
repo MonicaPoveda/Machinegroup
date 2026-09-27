@@ -106,10 +106,29 @@ def unsupervised_manual():
 from kmeans_model import generate_clusters
 @app.route("/unsupervised/application")
 def unsupervised_application():
-    (df, centroids, score, plot_url, summary, 
-     num_records, data_preview,data_full,
-     income_min, income_max, score_min, score_max) = generate_clusters()
-    
+    (
+        df, centroids, score, plot_url, summary,
+        num_records, data_preview, data_full,
+        income_min, income_max, score_min, score_max,
+        interpretations
+    ) = generate_clusters()
+
+    if score >= 0.50:
+        silhouette_interpretation = (
+            "The clustering structure is well separated: records are generally "
+            "close to their assigned cluster and far from other clusters."
+        )
+    elif score >= 0.25:
+        silhouette_interpretation = (
+            "The clustering structure is reasonable, although some records "
+            "may overlap with neighboring clusters."
+        )
+    else:
+        silhouette_interpretation = (
+            "The clustering structure has substantial overlap between groups; "
+            "the cluster assignments should therefore be interpreted with caution."
+        )
+
     return render_template(
         "unsupervised_learning/application.html",
         centroids=centroids,
@@ -122,7 +141,10 @@ def unsupervised_application():
         income_min=income_min,
         income_max=income_max,
         score_min=score_min,
-        score_max=score_max)
+        score_max=score_max,
+        interpretations=interpretations,
+        silhouette_interpretation=silhouette_interpretation
+    )
 
 
 @app.route("/use_cases")
