@@ -70,9 +70,6 @@ def types():
 def unsupervised_concepts():
     return render_template("unsupervised_learning/concepts.html")
 
-
-
-
 @app.route("/unsupervised/manual-exercise")
 def unsupervised_manual():
     base = os.path.join(app.root_path, "static", "datasets")
