@@ -6,7 +6,7 @@ from sklearn.linear_model import SGDRegressor
 # A = agent start, T = target, o = available path, # = wall, D = danger zone
 # Required count: A=1, T=1, o=68, #=20, D=10
 GRID = [
-    "Aoo#oooDoo",
+    "ooo#oooDoA",
     "o#ooo#oo#o",
     "o#D#ooDo#o",
     "oooo#ooooo",
@@ -15,10 +15,10 @@ GRID = [
     "o#o##o#Doo",
     "ooooo#Doo#",
     "o#DoDooooo",
-    "oooooo#ooT",
+    "Tooooo#ooo",
 ]
-START = (0, 0)
-GOAL = (9, 9)
+START = (0, 9)
+GOAL = (9, 0)
 
 # Actions: up, down, left, right
 ACTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import os  
 import pandas as pd 
+from reinforcement import ACTION_NAMES, GOAL, GRID, START, train
 # Logistic Regression Imports
 from logistic_Regression import ( 
     classify_message,
@@ -394,21 +395,20 @@ def svm_evalMetrics():
         interpretation=interpretation
     )
 
-# @app.route('/reinforcement', methods=['GET', 'POST']) 
-# def reinforcement():
-#     result = None 
+@app.route("/reinforcement", methods=["GET", "POST"])
+def reinforcement():
+    result = train(episodes=1000) if request.method == "POST" else None
+    path = result["path"] if result else []
 
-#     if request.method == 'POST': 
-#         result = train(episodes=1000)
-
-#     return render_template(
-#         'reinforcement.html', 
-#         result=result, 
-#         grid=GRID, 
-#         start=START, 
-#         goal=GOAL, 
-#         actions=ACTION_NAMES # (Opcional) Quité la coma extra que tenías aquí
-#     )
+    return render_template(
+        "reinforcement/reinforcement.html",
+        result=result,
+        grid=GRID,
+        start=START,
+        goal=GOAL,
+        actions=ACTION_NAMES,
+        path=path,
+    )
  
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
