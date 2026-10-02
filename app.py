@@ -395,21 +395,40 @@ def svm_evalMetrics():
         interpretation=interpretation
     )
 
-@app.route("/reinforcement", methods=["GET", "POST"])
-def reinforcement():
-    result = train(episodes=1000) if request.method == "POST" else None
-    path = result["path"] if result else []
-
+from reinforcement import (
+    GRID,
+    ROWS,
+    COLUMNS,
+    START,
+    GOAL,
+    ACTION_NAMES,
+    REWARDS,
+    MAX_STEPS,
+    environment_counts,
+    train as train_agent,
+)
+ 
+ 
+@app.route("/reinforcement/application", methods=["GET", "POST"])
+def reinforcement_application():
+    result = None
+ 
+    if request.method == "POST":
+        result = train_agent(episodes=1000)
+ 
     return render_template(
-        "reinforcement/reinforcement.html",
-        result=result,
+        "reinforcement/application.html",
         grid=GRID,
+        rows=ROWS,
+        columns=COLUMNS,
         start=START,
         goal=GOAL,
         actions=ACTION_NAMES,
-        path=path,
+        rewards=REWARDS,
+        env_counts=environment_counts(),
+        max_steps=MAX_STEPS,
+        result=result,
     )
- 
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
     app.run(debug=True)
