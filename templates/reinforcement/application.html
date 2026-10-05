@@ -376,7 +376,7 @@ Reinforcement Learning Application
              style="background-color: #001d3b;">
                 <p class="text-light small mb-0">
                     <strong class="text-white">Training episodes:</strong>
-                     1,000 — <strong class="text-white">Max steps per episode:</strong> 
+                     300 — <strong class="text-white">Max steps per episode:</strong> 
                      {{ max_steps }} — enough repetitions for the agent to experience the 10×10 grid, 
                      including walls and Danger Zones, many times before the Q-value estimates stabilize.
                 </p>
@@ -395,9 +395,22 @@ Reinforcement Learning Application
                 <h2 class="h3 text-white fw-bold mb-0">Training</h2>
             </div>
             <p class="text-light fs-5 mb-4">
-                Pressing the button below runs the Q-Learning process for 1,000 episodes against the 10×10 environment. Training is
+                Pressing the button below runs the Q-Learning process for 300 episodes against the 10×10 environment. Training is
                  triggered on demand through a POST request — the agent is not retrained automatically when the page loads.
             </p>
+
+            <div class="p-3 rounded-3 border border-warning border-opacity-50 mb-4" style="background-color: #241a00;">
+                <div class="d-flex gap-3">
+                    <i class="bi bi-info-circle-fill text-warning fs-4"></i>
+                    <div>
+                        <strong class="text-white d-block mb-1">Why 300 episodes instead of 1,000?</strong>
+                        <p class="text-light small mb-0">
+                            Training runs synchronously inside a single web request: the server does not respond until all episodes have finished. On the free hosting tier used for deployment, the web process is killed if a single request takes too long to complete. With 1,000 episodes, training this 10×10 environment occasionally exceeded that time budget and caused the request to fail. Reducing training to 300 episodes keeps every request comfortably within that limit while still giving the agent enough repetitions to converge — the success rate and average reward for this environment stabilize well before 300 episodes are reached. The episode count is defined once, as <code>TRAINING_EPISODES</code> in <code>app.py</code>, and can be raised again in environments without this time restriction (for example, when running the project locally).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <form method="post" action="{{ url_for('reinforcement_application') }}" class="text-center">
                 <button type="submit" class="btn btn-primary btn-lg fw-bold shadow px-5">
                     <i class="bi bi-play-fill me-2"></i>Train Agent
