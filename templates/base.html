@@ -104,7 +104,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border border-primary border-opacity-25 shadow" style="background-color: rgba(3, 12, 25, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
                             <li><h6 class="dropdown-header fw-medium mb-0" style="color: rgba(255, 255, 255, 0.45);">Reinforcement</h6></li>
-                            <li><button type="button" class="dropdown-item" disabled>Concepts</button></li>
+                            <li><a class="dropdown-item text-white" href="{{ url_for('reinforcement_concepts') }}">Concepts</a></li>
+                            <li><a class="dropdown-item text-white" href="{{ url_for('reinforcement_teacher_example') }}">Teacher's Example</a></li>
                             <li><a class="dropdown-item text-white" href="{{ url_for('reinforcement_application') }}">Application</a></li>
                         </ul>
                     </li>

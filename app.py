@@ -407,7 +407,27 @@ from reinforcement import (
     environment_counts,
     train as train_agent,
 )
+
+from reinforcement_teacher import train as train_teacher, GRID as TEACHER_GRID, START as TEACHER_START, GOAL as TEACHER_GOAL, ACTION_NAMES as TEACHER_ACTIONS
+
+@app.route("/reinforcement/teacher-example", methods=["GET", "POST"])
+def reinforcement_teacher_example():
+    result = None
+    if request.method == "POST":
+        result = train_teacher(episodes=1000)
+    return render_template(
+        "reinforcement/teacher_example.html",
+        result=result,
+        grid=TEACHER_GRID,
+        start=TEACHER_START,
+        goal=TEACHER_GOAL,
+        actions=TEACHER_ACTIONS,
+    )
  
+@app.route("/reinforcement/concepts")
+def reinforcement_concepts():
+    return render_template("reinforcement/concepts.html")
+
  
 @app.route("/reinforcement/application", methods=["GET", "POST"])
 def reinforcement_application():
