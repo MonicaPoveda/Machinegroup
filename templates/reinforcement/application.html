@@ -573,9 +573,109 @@ Reinforcement Learning Application
             </div>
         </div>
     </section>
+     <!-- 10. Step-by-Step Evaluation -->
+    <section id="evaluation" class="mt-5" style="scroll-margin-top: 105px;">
+        <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg p-4 p-md-5">
+            <div class="d-flezx align-items-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3"
+                 style="width: 48px; height: 48px;">
+                    <i class="bi bi-list-ol fs-4"></i>
+                <h3 class="mb-0">Step- by -Step Evaluation</h3>
+            </div>
+            <p class="text-light fs-5 mb-4">
+                The table below shows the agent's step-by-step evaluation after training, including the state, action taken, next state, cell type, and reward received for each step.
+            </p>
+            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                {% if result and result.steps %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Step</th>
+                                    <th>State</th>
+                                    <th>Action</th>
+                                    <th>Next State</th>
+                                    <th>Cell Type</th>
+                                    <th>Reward</th>
+                                </tr>
+                            </thead>
 
-    
+                            <tbody>
+                                {% for step in result.steps %}
+                                <tr>
+                                    <td>{{ step.number }}</td>
+                                    <td>{{ step.state }}</td>
+                                    <td>{{ step.action }}</td>
+                                    <td>{{ step.next_state }}</td>
+                                    <td>{{ step.cell_type }}</td>
+                                    <td>{{ step.reward }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                <div class="p-4 rounded-3 border border-primary border-opacity-25 text-center"
+                    style="background-color: #00152a;">
+                    <i class="bi bi-hourglass text-primary fs-2 mb-2"></i>
+                    <p class="text-light mb-0">Results will appear here once the agent has been trained.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- 12. Q-Values -->
+    <section id="qvalues" class="mb-5" style="scroll-margin-top: 105px;">
+        <div class="card bg-primary bg-opacity-10 border border-primary border-opacity-50 rounded-4 shadow-lg p-4 p-md-5">
+            <div class="d-flex align-items-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3" style="width: 50px; height: 50px;">
+                    <i class="bi bi-table fs-4"></i>
+                </div>
+                <h2 class="h3 text-white mb-0 fw-bold">Q-Values</h2>
+            </div>
 
+            <p class="text-light fs-5 mb-4">
+                The Q-values represent the agent's learned estimates of the expected future rewards for each action in each state. 
+                The table below shows the Q-values for all states after training, with the actions ordered as Up, Down, Left, Right.
+            </p>
+
+            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                {% if result and result.q_table %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>State</th>
+                                    <th>Up</th>
+                                    <th>Down</th>
+                                    <th>Left</th>
+                                    <th>Right</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for row in result.q_table %}
+                                <tr>
+                                    <td>{{ row.state }}</td>
+                                    <td>{{ row.action_values[0] }}</td>
+                                    <td>{{ row.action_values[1] }}</td>
+                                    <td>{{ row.action_values[2] }}</td>
+                                    <td>{{ row.action_values[3] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                <div class="p-4 rounded-3 border border-primary border-opacity-25 text-center"
+                    style="background-color: #00152a;">
+                    <i class="bi bi-hourglass text-primary fs-2 mb-2"></i>
+                    <p class="text-light mb-0">Results will appear here once the agent has been trained.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 </div>
 
 {% endblock %}
