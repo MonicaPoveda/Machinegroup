@@ -414,7 +414,7 @@ from reinforcement_teacher import train as train_teacher, GRID as TEACHER_GRID, 
 def reinforcement_teacher_example():
     result = None
     if request.method == "POST":
-        result = train_teacher(episodes=1000)
+        result = train_teacher(episodes=300)
     return render_template(
         "reinforcement/teacher_example.html",
         result=result,
