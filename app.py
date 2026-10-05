@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import os  
 import pandas as pd 
+from reinforcement import ACTION_NAMES, GOAL, GRID, START, train
 # Logistic Regression Imports
 from logistic_Regression import ( 
     classify_message,
@@ -69,9 +70,6 @@ def types():
 @app.route("/unsupervised/concepts")
 def unsupervised_concepts():
     return render_template("unsupervised_learning/concepts.html")
-
-
-
 
 @app.route("/unsupervised/manual-exercise")
 def unsupervised_manual():
@@ -397,22 +395,60 @@ def svm_evalMetrics():
         interpretation=interpretation
     )
 
-# @app.route('/reinforcement', methods=['GET', 'POST']) 
-# def reinforcement():
-#     result = None 
+from reinforcement import (
+    GRID,
+    ROWS,
+    COLUMNS,
+    START,
+    GOAL,
+    ACTION_NAMES,
+    REWARDS,
+    MAX_STEPS,
+    environment_counts,
+    train as train_agent,
+)
 
-#     if request.method == 'POST': 
-#         result = train(episodes=1000)
+from reinforcement_teacher import train as train_teacher, GRID as TEACHER_GRID, START as TEACHER_START, GOAL as TEACHER_GOAL, ACTION_NAMES as TEACHER_ACTIONS
 
-#     return render_template(
-#         'reinforcement.html', 
-#         result=result, 
-#         grid=GRID, 
-#         start=START, 
-#         goal=GOAL, 
-#         actions=ACTION_NAMES # (Opcional) Quité la coma extra que tenías aquí
-#     )
+@app.route("/reinforcement/teacher-example", methods=["GET", "POST"])
+def reinforcement_teacher_example():
+    result = None
+    if request.method == "POST":
+        result = train_teacher(episodes=1000)
+    return render_template(
+        "reinforcement/teacher_example.html",
+        result=result,
+        grid=TEACHER_GRID,
+        start=TEACHER_START,
+        goal=TEACHER_GOAL,
+        actions=TEACHER_ACTIONS,
+    )
  
+@app.route("/reinforcement/concepts")
+def reinforcement_concepts():
+    return render_template("reinforcement/concepts.html")
+
+ 
+@app.route("/reinforcement/application", methods=["GET", "POST"])
+def reinforcement_application():
+    result = None
+ 
+    if request.method == "POST":
+        result = train_agent(episodes=1000)
+ 
+    return render_template(
+        "reinforcement/application.html",
+        grid=GRID,
+        rows=ROWS,
+        columns=COLUMNS,
+        start=START,
+        goal=GOAL,
+        actions=ACTION_NAMES,
+        rewards=REWARDS,
+        env_counts=environment_counts(),
+        max_steps=MAX_STEPS,
+        result=result,
+    )
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
     app.run(debug=True)
