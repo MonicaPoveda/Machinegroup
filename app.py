@@ -414,7 +414,7 @@ from reinforcement_teacher import train as train_teacher, GRID as TEACHER_GRID, 
 def reinforcement_teacher_example():
     result = None
     if request.method == "POST":
-        result = train_teacher(episodes=1000)
+        result = train_teacher(episodes=300)
     return render_template(
         "reinforcement/teacher_example.html",
         result=result,
@@ -434,7 +434,7 @@ def reinforcement_application():
     result = None
  
     if request.method == "POST":
-        result = train_agent(episodes=1000)
+        result = train_agent(episodes=300)
  
     return render_template(
         "reinforcement/application.html",
@@ -449,6 +449,8 @@ def reinforcement_application():
         max_steps=MAX_STEPS,
         result=result,
     )
+
+
 # APPLICATION ENTRY POINT
 if __name__ == '__main__':
     app.run(debug=True)
